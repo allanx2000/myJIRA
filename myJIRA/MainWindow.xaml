@@ -1,0 +1,31 @@
+﻿<Window x:Class="myJIRA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:myJIRA"
+        mc:Ignorable="d"
+        Title="myJIRA" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0">
+            <MenuItem Header="File">
+                <MenuItem Header="Save"/>
+                <MenuItem Header="Import"/>
+                <Separator/>
+                <MenuItem Header="Settings"/>
+            </MenuItem>
+            <MenuItem Header="View Completed"/>
+        </Menu>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+            <StackPanel Name="KanbanBoard" Orientation="Horizontal"/>
+        </ScrollViewer>
+
+    </Grid>
+</Window>
