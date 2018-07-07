@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Innouvous.Utils.Data.SQLiteWrapper">
+      <HintPath>..\..\LinkedPasswords\LinkedPasswords\lib\Innouvous.Utils.Data.SQLiteWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="innouvous.Utils.Merged">
+      <HintPath>..\..\..\..\Visual Studio 2015\Projects\innouvous.Utils.Merged\innouvous.Utils.Merged\bin\Debug\innouvous.Utils.Merged.dll</HintPath>
+    </Reference>
+    <Reference Include="Innouvous.Utils.Merged45">
+      <HintPath>..\..\..\..\Visual Studio 2015\Projects\innouvous.Utils.Merged\Innouvous.Utils.Merged45\bin\Debug\Innouvous.Utils.Merged45.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -54,7 +63,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="BoardControl.xaml">
+    <Page Include="UserControls\BoardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditTicketModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -66,13 +79,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BoardControl.xaml.cs">
+    <Compile Include="AppStateManager.cs" />
+    <Compile Include="UserControls\BoardControl.xaml.cs">
       <DependentUpon>BoardControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DAO\DataStore.cs" />
     <Compile Include="DAO\MockDataStore.cs" />
+    <Compile Include="EditTicketModel.xaml.cs">
+      <DependentUpon>EditTicketModel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Importers\Importer.cs" />
-    <Compile Include="JIRAItemViewModel.cs" />
+    <Compile Include="ViewModels\JIRAItemViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -106,8 +123,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

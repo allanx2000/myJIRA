@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:myJIRA"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="pack://application:,,,/Innouvous.Utils.Merged;component/GenericDictionary45.xaml"/>
+
     </Application.Resources>
 </Application>

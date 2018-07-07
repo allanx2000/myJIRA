@@ -1,9 +1,5 @@
-﻿using myJIRA.DAO;
-using myJIRA.Models;
-using myJIRA.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,28 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace myJIRA
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EditJIRATicketModel.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EditJIRATicketModel : Window
     {
-        public MainWindow()
+        public EditJIRATicketModel()
         {
             InitializeComponent();
-
-            AppStateManager.Initialize(this);
         }
-
-        private void Test()
-        {
-         
-        }
-
-        
     }
 }

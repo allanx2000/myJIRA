@@ -23,11 +23,12 @@ namespace myJIRA.DAO
         private void CreateOpenJIRAs()
         {
             openJIRAs = new List<JIRAItem>();
-            openJIRAs.Add(new JIRAItem() { BoardId = 0, Title = "Test" });
-            openJIRAs.Add(new JIRAItem() { BoardId = 1, Title = "Test2" });
-            openJIRAs.Add(new JIRAItem() { BoardId = 2, Title = "Test3" });
-            openJIRAs.Add(new JIRAItem() { Title = "Test4" });
-            openJIRAs.Add(new JIRAItem() { Title = "Test5", DoneDate = DateTime.Today });
+            openJIRAs.Add(new JIRAItem() { BoardId = 0, Title = "Test", JiraKey="C1" });
+            openJIRAs.Add(new JIRAItem() { BoardId = 0, Title = "Test7", JiraKey = "C7" });
+            openJIRAs.Add(new JIRAItem() { BoardId = 1, Title = "Test2", JiraKey = "C2" });
+            openJIRAs.Add(new JIRAItem() { BoardId = 2, Title = "Test3", JiraKey = "C3" });
+            openJIRAs.Add(new JIRAItem() { Title = "Test4", JiraKey = "C4" });
+            openJIRAs.Add(new JIRAItem() { Title = "Test5", JiraKey = "C5", DoneDate = DateTime.Today });
         }
 
         private void CreateBoards()

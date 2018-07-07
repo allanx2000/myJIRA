@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace myJIRA.Models
 {
-    public class JIRAItem
+    public class JIRAItem : Innouvous.Utils.Merged45.MVVM45.ViewModel
     {
         public int? ID { get; set; }
-        
+     
         public string Notes { get; set; }
         
         /// <summary>
@@ -20,8 +21,7 @@ namespace myJIRA.Models
         public DateTime? ArchivedDate { get; set; }
 
         public DateTime? DoneDate { get; internal set; }
-
-
+        
         public int? BoardId { get; set; }
 
         #region From JIRA

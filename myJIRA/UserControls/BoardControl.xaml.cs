@@ -1,24 +1,45 @@
-﻿using myJIRA.DAO;
-using myJIRA.Models;
+﻿using myJIRA.Models;
+using myJIRA.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace myJIRA
+namespace myJIRA.UserControls
 {
+    public class BoardTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate Collapsed { get; set; }
+        public DataTemplate Expanded { get; set; }
+
+        //TODO: Cannot use Selector, mulst use dynamic trigger?
+        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        {
+
+            /*
+            YourClass obj = (YourClass)item;
+
+            if (obj.Type == "SomeType")
+            {
+                return Template1;
+            }
+            else
+            {
+                return Template2;
+            }
+            */
+
+            bool selected = true;
+
+            if (selected)
+                return Expanded;
+            else
+                return Collapsed;
+        }
+    }
+
     /// <summary>
     /// Interaction logic for BoardControl.xaml
     /// </summary>
@@ -37,12 +58,12 @@ namespace myJIRA
 
         internal static BoardControl CreateFirstBoard(string name, ObservableCollection<JIRAItemViewModel> jiras)
         {
-            return new BoardControl(new BoardName(name, -1), jiras, new Func<JIRAItemViewModel, bool>((i) => i.item.BoardId == null && i.item.DoneDate == null));
+            return new BoardControl(new BoardName(name, -1), jiras, new Func<JIRAItemViewModel, bool>((i) => i.Data.BoardId == null && i.Data.DoneDate == null));
         }
 
         internal static BoardControl CreateLastBoard(string name, ObservableCollection<JIRAItemViewModel> jiras)
         {
-            return new BoardControl(new BoardName(name, -2), jiras, new Func<JIRAItemViewModel, bool>((i) => i.item.DoneDate != null));
+            return new BoardControl(new BoardName(name, -2), jiras, new Func<JIRAItemViewModel, bool>((i) => i.Data.DoneDate != null));
         }
     }
 
@@ -53,9 +74,9 @@ namespace myJIRA
         private readonly CollectionViewSource cvs;
         private Func<JIRAItemViewModel, bool> filter;
 
-        private bool MatchBoardName(JIRAItemViewModel item)
+        private bool MatchBoardID(JIRAItemViewModel item)
         {
-            return boardName.ID == item.BoardId;
+            return boardName.ID == item.Data.BoardId;
         }
 
         public ICollectionView ItemsList
@@ -74,7 +95,7 @@ namespace myJIRA
             cvs = new CollectionViewSource();
             cvs.Source = jiras;
 
-            filter = customFilter == null ? MatchBoardName : customFilter;
+            filter = customFilter == null ? MatchBoardID : customFilter;
 
             cvs.Filter += Cvs_Filter;
         }
