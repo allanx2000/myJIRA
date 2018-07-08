@@ -10,20 +10,10 @@ namespace myJIRA.ViewModels
             this.item = item;
         }
 
-        /*
-        public string Title
+        public void DataUpdated()
         {
-            get { return item.Title; }
-            set
-            {
-                item.Title = value;
-                RaisePropertyChanged();
-            }
+            RaisePropertyChanged("Data");
         }
-
-        public int? BoardId {
-            get { return item.BoardId; }
-        }*/
 
         public JIRAItem Data
         {

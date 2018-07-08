@@ -22,7 +22,18 @@ namespace myJIRA.Models
 
         public DateTime? DoneDate { get; internal set; }
         
-        public int? BoardId { get; set; }
+        public int? BoardId
+        {
+            get
+            {
+                return Get<int?>();
+            }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
 
         #region From JIRA
         public string Title { get; set; }

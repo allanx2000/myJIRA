@@ -1,0 +1,43 @@
+﻿<Window x:Class="myJIRA.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:myJIRA"
+        mc:Ignorable="d"
+        Title="Settings" SizeToContent="Height" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource GridField}">Database: </Label>
+        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+            <Button DockPanel.Dock="Right" Command="{Binding SelectDBCommand}">...</Button>
+            <TextBox Text="{Binding DBPath}"/>
+        </DockPanel>
+
+        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource GridField}">Server URL: </Label>
+        <TextBox Grid.Row="1" Grid.Column="1"  Text="{Binding ServerURL}"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource GridField}">Browser:</Label>
+        <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="True">
+            <Button DockPanel.Dock="Right" Command="{Binding SelectBrowserCommand}">...</Button>
+            <TextBox Text="{Binding CustomBrowserPath}"/>
+        </DockPanel>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button>Change</Button>
+            <Button>Cancel</Button>
+        </StackPanel> 
+
+    </Grid>
+</Window>

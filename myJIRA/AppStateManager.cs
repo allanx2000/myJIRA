@@ -4,45 +4,66 @@ using myJIRA.UserControls;
 using myJIRA.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace myJIRA
 {
     internal static class AppStateManager
     {
         private static Properties.Settings settings = Properties.Settings.Default;
+        public static Properties.Settings Settings { get => settings; }
+
+
         private static ObservableCollection<JIRAItemViewModel> openJiras;
+        private static List<BoardControl> boardControls;
+        private static DataStore ds;
+
+        public static DataStore DataStore { get { return ds; } }
 
         internal static void Initialize(MainWindow mainWindow)
         {
             var kb = mainWindow.KanbanBoard;
-
+            kb.Orientation = System.Windows.Controls.Orientation.Vertical;
             kb.Children.Clear();
 
-            DataStore ds = GetDataStore();
+            ds = GetDataStore();
 
             var boardNames = ds.GetBoards();
 
             openJiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
 
             var first = BoardControl.CreateFirstBoard("Imported", openJiras);
+            ConfigureBoard(first);
             var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
+            ConfigureBoard(last);
 
-            List<BoardControl> boards = new List<BoardControl>();
-            boards.Add(first);
+            boardControls = new List<BoardControl>();
+            boardControls.Add(first);
 
             foreach (var b in boardNames)
             {
                 BoardControl boardControl = new BoardControl(
                     b, openJiras);
 
-                boards.Add(boardControl);
+                ConfigureBoard(boardControl);
+
+                boardControls.Add(boardControl);
             }
 
-            boards.Add(last);
+            boardControls.Add(last);
 
-            foreach (var b in boards)
+            foreach (var b in boardControls)
                 kb.Children.Add(b);
+            
+            for (int i = 0; i < boardControls.Count; i++)
+            {
 
+            }
+        }
+
+        private static void ConfigureBoard(BoardControl bc)
+        {
+            bc.MinHeight = 200;
         }
 
         private static DataStore GetDataStore()
@@ -59,6 +80,14 @@ namespace myJIRA
                 vms.Add(new JIRAItemViewModel(i));
 
             return vms;
+        }
+
+        internal static void RefreshBoards()
+        {
+            foreach (var b in boardControls)
+            {
+                b.Refresh();
+            }
         }
     }
 }

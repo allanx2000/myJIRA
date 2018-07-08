@@ -52,15 +52,18 @@ namespace myJIRA.DAO
         {
             return openJIRAs;
         }
-
+        
         public void UpsertBoards(List<BoardName> boards)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void UpsertJIRA(JIRAItem jira)
         {
-            throw new System.NotImplementedException();
+            if (!openJIRAs.Contains(jira))
+            {
+                throw new NotSupportedException();
+            }
         }
     }
 }

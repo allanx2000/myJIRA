@@ -18,7 +18,7 @@
                 <MenuItem Header="Save"/>
                 <MenuItem Header="Import"/>
                 <Separator/>
-                <MenuItem Header="Settings"/>
+                <MenuItem Header="Settings" Command="{Binding OpenSettingsCommand}"/>
             </MenuItem>
             <MenuItem Header="View Completed"/>
         </Menu>
