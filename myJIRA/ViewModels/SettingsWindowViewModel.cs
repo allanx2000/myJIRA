@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System;
 using Innouvous.Utils;
+using System.IO;
 
 namespace myJIRA.ViewModels
 {
@@ -20,7 +21,10 @@ namespace myJIRA.ViewModels
 
         private void LoadSettings()
         {
-            DBPath = AppStateManager.Settings.
+            var settings = AppStateManager.Settings;
+            DBPath = settings.DBPath;
+            ServerURL = settings.ServerUrl;
+            CustomBrowserPath = settings.CustomBrowserPath;
         }
 
         public bool Cancelled { get; private set; }
@@ -69,14 +73,60 @@ namespace myJIRA.ViewModels
 
                 dlg.ShowDialog();
 
-                if (dlg.FileName != null)
+                if (!string.IsNullOrEmpty(dlg.FileName))
                     DBPath = dlg.FileName;
             }
             catch (Exception e)
             {
                 MessageBoxFactory.ShowError(e);
             }
+        }
+        
+        public ICommand CancelCommand
+        {
+            get => new CommandHelper(() => settingsWindow.Close());
+        }
+        
+        public ICommand SaveCommand
+        {
+            get => new CommandHelper(SaveSettings);
+        }
 
+        private void SaveSettings()
+        {
+            try
+            {
+
+                if (string.IsNullOrEmpty(DBPath))
+                {
+                    throw new Exception("Database is required.");
+                }
+                
+                try
+                {
+                    FileInfo fi = new FileInfo(DBPath);
+
+                    if (fi.FullName != DBPath)
+                        DBPath = fi.FullName;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Database path is not valid.", e);
+                }
+
+                var settings = AppStateManager.Settings;
+                settings.DBPath = DBPath;
+                settings.ServerUrl = ServerURL;
+                settings.CustomBrowserPath = CustomBrowserPath;
+                settings.Save();
+
+                Cancelled = false;
+                settingsWindow.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
         }
     }
 }

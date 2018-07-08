@@ -1,0 +1,20 @@
+﻿create table tbl_jiras (
+	id	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	notes text,
+	archived_date text,
+	done_date text,
+	board_id integer,
+	
+	/* JIRA */
+	created_date text NOT NULL,
+	title text not null,
+	jira_key text not null,
+	sprint_id text,
+	
+	UNIQUE (jira_key),
+
+	FOREIGN KEY (board_id)
+		REFERENCES tbl_boards(id)
+			ON DELETE SET NULL
+			ON UPDATE CASCADE
+)

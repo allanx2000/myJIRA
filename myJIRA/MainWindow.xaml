@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
-        Title="myJIRA" Height="350" Width="525">
+        Title="myJIRA" Height="600" Width="525" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,16 +13,33 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
-            <MenuItem Header="File">
-                <MenuItem Header="Save"/>
-                <MenuItem Header="Import"/>
-                <Separator/>
-                <MenuItem Header="Settings" Command="{Binding OpenSettingsCommand}"/>
-            </MenuItem>
-            <MenuItem Header="View Completed"/>
-        </Menu>
+        <DockPanel Grid.Row="0" LastChildFill="True">
 
+            <DockPanel.Resources>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </DockPanel.Resources>
+            <Menu DockPanel.Dock="Left">
+                <MenuItem Header="File">
+                    <MenuItem Header="Import JIRAs"/>
+                    <!--
+                    <MenuItem Header="Save"/>
+                    -->
+                    <MenuItem Header="Manage Boards"/>
+                    <Separator/>
+                    <MenuItem Header="App Settings" Command="{Binding OpenSettingsCommand}"/>
+                </MenuItem>
+                <MenuItem Header="View Completed"/>
+            </Menu>
+
+            <Menu DockPanel.Dock="Right">
+                <MenuItem Header="Create..."/>
+            </Menu>
+
+            <Menu/>
+        </DockPanel>
+        
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
             <StackPanel Name="KanbanBoard" Orientation="Horizontal"/>
         </ScrollViewer>

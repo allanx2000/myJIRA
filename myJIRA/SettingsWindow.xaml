@@ -35,8 +35,8 @@
         </DockPanel>
 
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button>Change</Button>
-            <Button>Cancel</Button>
+            <Button Command="{Binding SaveCommand}">Save</Button>
+            <Button Command="{Binding CancelCommand}">Cancel</Button>
         </StackPanel> 
 
     </Grid>

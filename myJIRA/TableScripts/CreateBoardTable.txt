@@ -1,0 +1,7 @@
+﻿create table tbl_boards (
+	id	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	name text NOT NULL,
+	"order" integer NOT NULL,
+	
+	UNIQUE (name)
+)

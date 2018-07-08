@@ -32,7 +32,7 @@ namespace myJIRA
 
             openJiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
 
-            var first = BoardControl.CreateFirstBoard("Imported", openJiras);
+            var first = BoardControl.CreateFirstBoard("", openJiras);
             ConfigureBoard(first);
             var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
             ConfigureBoard(last);
@@ -68,9 +68,15 @@ namespace myJIRA
 
         private static DataStore GetDataStore()
         {
-            //TODO: Create Settings and load db
-            
-            return new MockDataStore();
+            while (string.IsNullOrEmpty(Settings.DBPath))
+            {
+                var dlg = new SettingsWindow();
+                dlg.ShowDialog();
+            }
+
+            return new SQLDataStore(settings.DBPath);
+
+            //return new MockDataStore();
         }
         
         private static ObservableCollection<JIRAItemViewModel> CreateViewModelsFromJIRAs(List<JIRAItem> list)
