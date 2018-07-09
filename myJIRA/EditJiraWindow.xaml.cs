@@ -1,5 +1,4 @@
 ﻿using myJIRA.Models;
-using myJIRA.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,24 +12,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using myJIRA.ViewModels;
 
 namespace myJIRA
 {
     /// <summary>
-    /// Interaction logic for EditJiraViewModelWindow.xaml
+    /// Interaction logic for EditJiraWindow.xaml
     /// </summary>
     public partial class EditJiraWindow : Window
     {
         private readonly EditJiraWindowViewModel vm;
 
-        public bool Cancelled { get => vm.Cancelled; }
-
         public EditJiraWindow(JIRAItem existing = null)
         {
             InitializeComponent();
 
-            this.vm = new EditJiraWindowViewModel(this, existing);
+            vm = new EditJiraWindowViewModel(this, existing);
             DataContext = vm;
         }
+
+        public bool Cancelled { get => vm.Cancelled; }
     }
 }
