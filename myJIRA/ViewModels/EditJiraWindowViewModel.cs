@@ -34,7 +34,7 @@ namespace myJIRA.ViewModels
             }
         }
         
-        public string Title { get => ((existing == null ? "New" : "Edit") + " JIRA"; }
+        public string Title { get => (existing == null ? "New" : "Edit") + " JIRA"; }
         public bool Cancelled { get; private set; }
 
         public string JiraKey { get; set; }
