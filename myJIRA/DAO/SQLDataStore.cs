@@ -33,12 +33,11 @@ namespace myJIRA.DAO
             {
                 CreateTables();
             }
-
-
-            TestBoard();
+            
+            AddTestBoards();
         }
 
-        private void TestBoard()
+        private void AddTestBoards()
         {
             List<BoardName> boards = new List<BoardName>();
             boards.Add(new BoardName("Doing"));
@@ -76,8 +75,7 @@ namespace myJIRA.DAO
             return SQLUtils.LoadCommandFromText(ScriptsPath, name, ScriptsFormat, args);
 
         }
-
-
+        
         #endregion
 
         public void DeleteJIRA(int id)
@@ -119,9 +117,51 @@ namespace myJIRA.DAO
 
         public List<JIRAItem> LoadOpenJIRAs()
         {
-            return new List<JIRAItem>();
+            string cmd = string.Format("select * from {0} where done_date is null AND archived_date is null", Jiras);
+            var results = client.ExecuteSelect(cmd);
+
+            var list = new List<JIRAItem>();
+
+            foreach (DataRow r in results.Rows)
+            {
+                list.Add(ParseJiraItem(r));
+            }
+
+            return list;
         }
 
+        private JIRAItem ParseJiraItem(DataRow r)
+        {
+            JIRAItem jira = new JIRAItem();
+            
+            if (!SQLUtils.IsNull(r["archived_date"]))
+                jira.ArchivedDate = SQLUtils.ToDateTime(r["archived_date"].ToString());
+
+            if (!SQLUtils.IsNull(r["board_id"]))
+                jira.BoardId = Convert.ToInt32(r["board_id"]);
+
+            jira.CreatedDate = SQLUtils.ToDateTime(r["created_date"].ToString());
+
+            if (!SQLUtils.IsNull(r["done_date"]))
+                jira.DoneDate = SQLUtils.ToDateTime(r["done_date"].ToString());
+
+            jira.ID = jira.BoardId = Convert.ToInt32(r["id"]);
+
+            jira.ImportedDate = jira.CreatedDate; //TODO: Track or remove? Need to add to DB
+
+            jira.JiraKey = r["jira_key"].ToString();
+            
+            if (!SQLUtils.IsNull(r["notes"]))
+                jira.Notes = r["notes"].ToString();
+
+            if (!SQLUtils.IsNull(r["sprint_id"]))
+                jira.SprintId = r["sprint_id"].ToString();
+
+            jira.Status = r["status"].ToString();
+            jira.Title = r["title"].ToString();
+
+            return jira;
+        }
 
         public void UpsertBoards(List<BoardName> boards)
         {

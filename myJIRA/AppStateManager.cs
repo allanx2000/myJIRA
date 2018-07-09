@@ -88,12 +88,24 @@ namespace myJIRA
             return vms;
         }
 
+        /// <summary>
+        /// Refreshes the Listboxes in the BoardControls
+        /// </summary>
         internal static void RefreshBoards()
         {
             foreach (var b in boardControls)
             {
                 b.Refresh();
             }
+        }
+
+        public static void ReloadOpenJIRAs()
+        {
+            openJiras.Clear();
+            var jiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
+
+            foreach (var j in jiras)
+                openJiras.Add(j);
         }
     }
 }

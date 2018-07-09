@@ -64,8 +64,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAO\SQLDataStore.cs" />
+    <Compile Include="EditJiraWindow.xaml.cs">
+      <DependentUpon>EditJiraWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\EditJiraWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Page Include="EditJiraWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

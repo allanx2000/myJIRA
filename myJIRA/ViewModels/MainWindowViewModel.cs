@@ -36,11 +36,36 @@ namespace myJIRA.ViewModels
         private void OpenSettings()
         {
             var dlg = new SettingsWindow();
+            dlg.Owner = mainWindow;
             dlg.ShowDialog();
 
             if (!dlg.Cancelled)
             {
                 AppStateManager.Initialize(mainWindow);
+            }
+        }
+
+        public ICommand CreateJiraCommand
+        {
+            get => new CommandHelper(CreateJIRA);
+        }
+
+        private void CreateJIRA()
+        {
+            try
+            {
+                var dlg = new EditJiraWindow();
+                dlg.Owner = mainWindow;
+                dlg.ShowDialog();
+
+                if (!dlg.Cancelled)
+                {
+                    AppStateManager.ReloadOpenJIRAs();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
             }
         }
     }

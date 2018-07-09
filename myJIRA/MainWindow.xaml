@@ -34,7 +34,7 @@
             </Menu>
 
             <Menu DockPanel.Dock="Right">
-                <MenuItem Header="Create..."/>
+                <MenuItem Header="Create..." Command="{Binding CreateJiraCommand}"/>
             </Menu>
 
             <Menu/>
