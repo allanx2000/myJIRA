@@ -68,5 +68,31 @@ namespace myJIRA.ViewModels
                 MessageBoxFactory.ShowError(e);
             }
         }
+
+        public ICommand ManageBoardsCommand
+        {
+            get => new CommandHelper(ManageBoards);
+        }
+
+        private void ManageBoards()
+        {
+            try
+            {
+                var dlg = new ManageBoardsWindow();
+                dlg.Owner = mainWindow;
+                dlg.ShowDialog();
+
+                if (!dlg.Cancelled)
+                {
+                    AppStateManager.Initialize(mainWindow);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
+        }
+
+        
     }
 }

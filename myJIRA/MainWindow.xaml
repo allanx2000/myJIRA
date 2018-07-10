@@ -26,7 +26,7 @@
                     <!--
                     <MenuItem Header="Save"/>
                     -->
-                    <MenuItem Header="Manage Boards"/>
+                    <MenuItem Header="Manage Boards" Command="{Binding ManageBoardsCommand}"/>
                     <Separator/>
                     <MenuItem Header="App Settings" Command="{Binding OpenSettingsCommand}"/>
                 </MenuItem>

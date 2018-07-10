@@ -64,9 +64,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAO\SQLDataStore.cs" />
+    <Compile Include="ManageBoardsWindow.xaml.cs">
+      <DependentUpon>ManageBoardsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\EditBoardNameItemViewModel.cs" />
     <Compile Include="ViewModels\EditJiraWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ManageBoardsWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsWindowViewModel.cs" />
+    <Page Include="ManageBoardsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

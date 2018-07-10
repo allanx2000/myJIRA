@@ -1,0 +1,33 @@
+﻿<Window x:Class="myJIRA.ManageBoardsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:myJIRA"
+        mc:Ignorable="d"
+        Title="Manage Boards" Height="300" Width="400">
+    <DockPanel LastChildFill="True">
+
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button>Save</Button>
+            <Button>Cancel</Button>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Width="70">
+            <Button>Add</Button>
+            <Button>Edit</Button>
+            <Button Content="{Binding DeleteRestoreText, FallbackValue=Delete}" />
+        </StackPanel>
+
+
+        <ListBox HorizontalAlignment="Stretch" Margin="5" ItemsSource="{Binding Boards}" SelectedItem="{Binding SelectedBoard}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Margin="10" Foreground="{Binding TextColor}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </Label>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</Window>
