@@ -53,7 +53,12 @@ namespace myJIRA.Models
         /// Date the JIRA was created
         /// </summary>
         public DateTime CreatedDate { get; set; }
-        
+
+        internal JIRAItem Clone()
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

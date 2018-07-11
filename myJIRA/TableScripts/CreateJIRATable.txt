@@ -8,7 +8,7 @@
 	/* JIRA */
 	created_date text NOT NULL,
 	title text not null,
-	jira_key text not varchar(100),
+	jira_key varchar(100) not null,
 	sprint_id text,
 	status varchar(100),
 	

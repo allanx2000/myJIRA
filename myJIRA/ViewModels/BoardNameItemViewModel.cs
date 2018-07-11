@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace myJIRA.ViewModels
 {
+    /// <summary>
+    /// View Model for the ListBox in ManageBoardsWindow
+    /// </summary>
     class BoardNameItemViewModel : ViewModel
     {
         public enum Status

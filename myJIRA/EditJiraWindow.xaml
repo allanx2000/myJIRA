@@ -44,7 +44,12 @@
         <Label Grid.Row="2" Grid.Column="2" Style="{StaticResource GridField}">Status: </Label>
         <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Status}"/>
 
-        <GroupBox Grid.Row="3" Grid.ColumnSpan="4" Header="Notes" Height="300"></GroupBox>
+        <GroupBox Grid.Row="3" Grid.ColumnSpan="4" Header="Notes">
+            <TextBox Height="300" AcceptsReturn="True" AcceptsTab="True" 
+                     Text="{Binding Notes}"
+                     HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </GroupBox>
 
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2">
             <CheckBox IsChecked="{Binding IsDone}">Done</CheckBox>

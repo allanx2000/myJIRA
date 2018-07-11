@@ -33,9 +33,9 @@ namespace myJIRA
             openJiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
 
             var first = BoardControl.CreateFirstBoard("Not Started", openJiras);
-            ConfigureBoard(first);
+            ConfigureBoardControl(first);
             var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
-            ConfigureBoard(last);
+            ConfigureBoardControl(last);
 
             boardControls = new List<BoardControl>();
             boardControls.Add(first);
@@ -45,7 +45,7 @@ namespace myJIRA
                 BoardControl boardControl = new BoardControl(
                     b, openJiras);
 
-                ConfigureBoard(boardControl);
+                ConfigureBoardControl(boardControl);
 
                 boardControls.Add(boardControl);
             }
@@ -54,14 +54,9 @@ namespace myJIRA
 
             foreach (var b in boardControls)
                 kb.Children.Add(b);
-            
-            for (int i = 0; i < boardControls.Count; i++)
-            {
-
-            }
         }
 
-        private static void ConfigureBoard(BoardControl bc)
+        private static void ConfigureBoardControl(BoardControl bc)
         {
             bc.MinHeight = 200;
         }

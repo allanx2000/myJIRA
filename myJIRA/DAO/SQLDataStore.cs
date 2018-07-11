@@ -29,12 +29,19 @@ namespace myJIRA.DAO
 
             client = new SQLiteClient(path, isNew, args);
 
-            if (!SQLUtils.CheckTableExists(Boards, client))
+            if (!TableExists(Boards)) //TODO: Fix in SQLUtils
             {
                 CreateTables();
             }
-            
+
             //AddTestBoards();
+        }
+
+        private bool TableExists(string name)
+        {
+            string cmd = string.Format("SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{0}'", name);
+
+            return !SQLUtils.IsNull(client.ExecuteScalar(cmd));
         }
 
         private void AddTestBoards()
@@ -75,7 +82,7 @@ namespace myJIRA.DAO
             return SQLUtils.LoadCommandFromText(ScriptsPath, name, ScriptsFormat, args);
 
         }
-        
+
         #endregion
 
         public void DeleteJIRA(int id)
@@ -133,7 +140,7 @@ namespace myJIRA.DAO
         private JIRAItem ParseJiraItem(DataRow r)
         {
             JIRAItem jira = new JIRAItem();
-            
+
             if (!SQLUtils.IsNull(r["archived_date"]))
                 jira.ArchivedDate = SQLUtils.ToDateTime(r["archived_date"].ToString());
 
@@ -150,7 +157,7 @@ namespace myJIRA.DAO
             jira.ImportedDate = jira.CreatedDate; //TODO: Track or remove? Need to add to DB
 
             jira.JiraKey = r["jira_key"].ToString();
-            
+
             if (!SQLUtils.IsNull(r["notes"]))
                 jira.Notes = r["notes"].ToString();
 
@@ -177,7 +184,7 @@ namespace myJIRA.DAO
                 );
 
             client.ExecuteNonQuery(cmd);
-            
+
             //Upsert
             foreach (BoardName bn in boards)
             {
@@ -206,7 +213,85 @@ namespace myJIRA.DAO
 
         public void UpsertJIRA(JIRAItem jira)
         {
-            throw new NotImplementedException();
+            /*
+             * id	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+	notes text,
+	archived_date text,
+	done_date text,
+	board_id integer,
+	
+	        created_date text NOT NULL,
+            title text not null,
+	jira_key text not varchar(100),
+	sprint_id text,
+    status varchar(100),
+	*/
+            string cmd;
+            if (jira.ID == null) //New
+            {
+                cmd = string.Format("insert into {0} values(NULL,{1},{2},{3},{4},'{5}','{6}','{7}',{8},{9})",
+                    Jiras,
+                    ToStringOrNull(jira.Notes),
+                    ToStringOrNull(jira.ArchivedDate),
+                    ToStringOrNull(jira.DoneDate), //3
+                    (jira.BoardId == null ? NULL : jira.BoardId.ToString()),
+                    SQLUtils.ToSQLDateTime(jira.CreatedDate),
+                    SQLUtils.SQLEncode(jira.Title),
+                    SQLUtils.SQLEncode(jira.JiraKey),
+                    ToStringOrNull(jira.SprintId),
+                    ToStringOrNull(jira.Status)
+                    );
+            }
+            else //Update
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("update {0} set notes={1}, archived_date={2}, done_date={3}, board_id={4},");
+                sb.AppendLine("created_date='{5}', title='{6}', jira_key='{7}', sprint_id={8}, status={9}");
+                sb.AppendLine("where id = {10}");
+
+                var str = sb.ToString();
+
+                cmd = string.Format(str,
+                    Jiras,
+                    ToStringOrNull(jira.Notes),
+                    ToStringOrNull(jira.ArchivedDate),
+                    ToStringOrNull(jira.DoneDate),
+                    jira.BoardId == null ? NULL : jira.BoardId.ToString(),
+                    SQLUtils.ToSQLDateTime(jira.CreatedDate),
+                    SQLUtils.SQLEncode(jira.Title),
+                    SQLUtils.SQLEncode(jira.JiraKey),
+                    ToStringOrNull(jira.SprintId),
+                    ToStringOrNull(jira.Status),
+                    jira.ID.Value
+                    );
+            }
+
+            client.ExecuteNonQuery(cmd);
+        }
+
+        private const string NULL = "NULL";
+
+        /// <summary>
+        /// Returns NULL or quotes the value
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
+        private object ToStringOrNull(object val)
+        {
+            if (val == null)
+                return NULL;
+
+            string raw;
+            if (val is DateTime?)
+            {
+                raw = SQLUtils.ToSQLDateTime(((DateTime?)val).Value);
+            }
+            else if (val is string)
+                raw = SQLUtils.SQLEncode(val.ToString());
+            else
+                throw new NotImplementedException();
+
+            return "'" + raw + "'";
         }
     }
 }

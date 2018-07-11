@@ -1,9 +1,12 @@
 ﻿using System;
 using myJIRA.Models;
+using Innouvous.Utils;
+using System.Windows.Input;
+using Innouvous.Utils.MVVM;
 
 namespace myJIRA.ViewModels
 {
-    internal class EditJiraWindowViewModel
+    internal class EditJiraWindowViewModel : Innouvous.Utils.Merged45.MVVM45.ViewModel
     {
         private EditJiraWindow editJiraWindow;
         private JIRAItem existing;
@@ -28,7 +31,6 @@ namespace myJIRA.ViewModels
                 Status = existing.Status;
                 JiraTitle = existing.Title;
                 
-
                 IsDone = existing.DoneDate == null;
                 IsArchived = existing.ArchivedDate == null;
             }
@@ -44,5 +46,75 @@ namespace myJIRA.ViewModels
         public string JiraTitle { get; set; }
         public bool IsDone { get; set; }
         public bool IsArchived { get; set; }
+
+
+        public ICommand SaveCommand { get => new CommandHelper(Save); }
+
+        private void Save()
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(JiraKey))
+                    throw new Exception("Key is required.");
+
+                if (string.IsNullOrEmpty(JiraTitle))
+                    throw new Exception("Title is required.");
+
+                JIRAItem item = new JIRAItem();
+
+                if (existing != null)
+                {
+                    item.ID = existing.ID;
+                    //item.BoardId = existing.BoardId;
+                    item.ArchivedDate = existing.ArchivedDate;
+                    item.DoneDate = existing.DoneDate;
+                }
+                else
+                    item.CreatedDate = DateTime.Today;
+
+                //Always Set
+                item.JiraKey = JiraKey;
+                item.Notes = Notes;
+                item.SprintId = SprintId;
+                item.Status = Status;
+                item.Title = JiraTitle;
+                
+                if (IsDone)
+                {
+                    if (item.DoneDate == null)
+                        item.DoneDate = DateTime.Today;
+                }
+                else
+                    item.DoneDate = null;
+
+
+                if (IsArchived)
+                {
+                    if (item.ArchivedDate == null)
+                        item.ArchivedDate = DateTime.Today;
+                }
+                else
+                    item.ArchivedDate = null;
+
+
+                AppStateManager.DataStore.UpsertJIRA(item);
+
+                Cancelled = false;
+                editJiraWindow.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
+        }
+
+        public ICommand CancelCommand
+        {
+            get => new CommandHelper(() =>
+            {
+                editJiraWindow.Close();
+            });
+        }
+
     }
 }
