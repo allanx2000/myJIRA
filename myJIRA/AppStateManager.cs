@@ -32,7 +32,7 @@ namespace myJIRA
 
             openJiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
 
-            var first = BoardControl.CreateFirstBoard("", openJiras);
+            var first = BoardControl.CreateFirstBoard("Not Started", openJiras);
             ConfigureBoard(first);
             var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
             ConfigureBoard(last);

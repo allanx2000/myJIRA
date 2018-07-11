@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace myJIRA.ViewModels
 {
-    class EditBoardNameItemViewModel : ViewModel
+    class BoardNameItemViewModel : ViewModel
     {
         public enum Status
         {
@@ -56,27 +56,29 @@ namespace myJIRA.ViewModels
             set
             {
                 Set(value);
+
                 RaisePropertyChanged();
             }
         }
 
         private BoardName existing;
 
-        public EditBoardNameItemViewModel(string name)
+        public BoardNameItemViewModel(string name)
         {
             Name = name;
             CurrentStatus = Status.New;
         }
 
-        public EditBoardNameItemViewModel(BoardName bn)
+        public BoardNameItemViewModel(BoardName bn)
         {
             Name = bn.Name;
             this.existing = bn;
             CurrentStatus = Status.Existing;
         }
 
-
-
-        
+        internal BoardName GetExisting()
+        {
+            return existing;
+        }
     }
 }

@@ -99,7 +99,8 @@ namespace myJIRA.UserControls
             dragSource = null;
         }
 
-        private static object GetDataFromListBox(ListBox source, Point point)
+        //Move into Utils
+        public static object GetDataFromListBox(ListBox source, Point point)
         {
             UIElement element = source.InputHitTest(point) as UIElement;
             if (element != null)

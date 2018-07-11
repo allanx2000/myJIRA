@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
-        Title="{Binding Title, FallbackValue=EditJIRAWindow}" Width="400" SizeToContent="Height">
+        Title="{Binding Title, FallbackValue=EditJIRAWindow}" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner">
     <Grid>
 
         <!--

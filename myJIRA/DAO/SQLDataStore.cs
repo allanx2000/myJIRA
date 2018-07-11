@@ -34,7 +34,7 @@ namespace myJIRA.DAO
                 CreateTables();
             }
             
-            AddTestBoards();
+            //AddTestBoards();
         }
 
         private void AddTestBoards()
@@ -170,6 +170,7 @@ namespace myJIRA.DAO
 
             //Delete removed
             var ids = from b in boards where b.ID != null select b.ID.Value;
+
             cmd = string.Format("delete from {0} where id not in ({1})",
                 Boards,
                 string.Join(",", ids)
@@ -192,7 +193,7 @@ namespace myJIRA.DAO
                 else
                 {
                     cmd = string.Format("update {0} set name='{1}', \"order\"={2} where id = {3}",
-                        boards,
+                        Boards,
                         SQLUtils.SQLEncode(bn.Name),
                         bn.Order,
                         bn.ID.Value

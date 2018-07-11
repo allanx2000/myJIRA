@@ -5,22 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
-        Title="Manage Boards" Height="300" Width="400">
+        Title="Manage Boards" Height="300" Width="400" WindowStartupLocation="CenterOwner">
     <DockPanel LastChildFill="True">
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button>Save</Button>
-            <Button>Cancel</Button>
+            <Button Command="{Binding SaveCommand}">Save</Button>
+            <Button Command="{Binding CancelCommand}">Cancel</Button>
         </StackPanel>
 
         <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Width="70">
-            <Button>Add</Button>
-            <Button>Edit</Button>
-            <Button Content="{Binding DeleteRestoreText, FallbackValue=Delete}" />
+            <Button Command="{Binding AddCommand}">Add</Button>
+            <Button Command="{Binding EditCommand}">Edit</Button>
+            <Button Command="{Binding DeleteRestoreCommand}" Content="{Binding DeleteRestoreText, FallbackValue=Delete}" />
         </StackPanel>
 
 
-        <ListBox HorizontalAlignment="Stretch" Margin="5" ItemsSource="{Binding Boards}" SelectedItem="{Binding SelectedBoard}">
+        <ListBox Name="BoardsList" HorizontalAlignment="Stretch" Margin="5" ItemsSource="{Binding Boards}" 
+                 SelectedItem="{Binding SelectedBoard}" DragOver="BoardsList_DragOver">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Margin="10" Foreground="{Binding TextColor}">
