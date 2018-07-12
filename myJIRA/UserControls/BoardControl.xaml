@@ -39,9 +39,9 @@
                     <Grid DataContext="{Binding Data}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -52,7 +52,11 @@
                         <Label Grid.Column="2" Background="LightGreen">
                             <TextBlock  Text="{Binding SprintId}"/>
                         </Label>
-                        
+
+                        <Label Grid.Column="4" Background="LightPink">
+                            <TextBlock  Text="{Binding Status}"/>
+                        </Label>
+
                     </Grid>
                  </StackPanel>
 
