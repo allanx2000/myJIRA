@@ -1,9 +1,12 @@
-﻿using myJIRA.Models;
+﻿using Innouvous.Utils;
+using Innouvous.Utils.MVVM;
+using myJIRA.Models;
 using myJIRA.ViewModels;
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -137,6 +140,31 @@ namespace myJIRA.UserControls
 
         #endregion
 
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var lb = sender as ListBox;
+
+            if (lb != null && lb.SelectedItem != null)
+            {
+                var item = lb.SelectedItem as JIRAItemViewModel;
+
+                if (item != null)
+                {
+                    string url = AppStateManager.Settings.ServerUrl + item.Data.JiraKey;
+                    
+                    string cbp = AppStateManager.Settings.CustomBrowserPath;
+
+                    if (string.IsNullOrEmpty(cbp))
+                    {
+                        Process.Start(url);
+                    }
+                    else
+                        Process.Start(cbp, url);
+
+                    
+                }
+            }
+        }
     }
 
     public class BoardControlViewModel
@@ -145,6 +173,8 @@ namespace myJIRA.UserControls
         private readonly ObservableCollection<JIRAItemViewModel> jiras;
         private readonly CollectionViewSource cvs;
         private Func<JIRAItemViewModel, bool> filter;
+
+        public JIRAItemViewModel SelectedJira { get; set; }
 
         private bool MatchBoardID(JIRAItemViewModel item)
         {
@@ -192,5 +222,7 @@ namespace myJIRA.UserControls
         {
             cvs.View.Refresh();
         }
+
+       
     }
 }

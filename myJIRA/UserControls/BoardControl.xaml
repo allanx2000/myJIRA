@@ -6,14 +6,19 @@
              xmlns:local="clr-namespace:myJIRA"
              xmlns:uc="clr-namespace:myJIRA.UserControls"
              mc:Ignorable="d" 
-             
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxItemTemplate">
- 
+
             <!-- Collapsed -->
             <StackPanel>
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit" Command="{Binding EditCommand}"/>
+                        <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
                 <StackPanel>
                     <StackPanel.Style>
                         <Style TargetType="{x:Type StackPanel}">
@@ -31,9 +36,10 @@
                         </Style>
                     </StackPanel.Style>
 
-                    <Label>
-                        <TextBlock DataContext="{Binding Data}" Text="{Binding Title}"/>
-                    </Label>
+                    <DockPanel LastChildFill="True" DataContext="{Binding Data}">
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding SprintId, FallbackValue=Sprint}"/>
+                        <TextBlock  Text="{Binding Title}"/>
+                    </DockPanel>
                 </StackPanel>
 
                 <!-- Expanded -->
@@ -75,9 +81,11 @@
 
                         <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Style="{StaticResource GridField}">Key:</Label>
                         <Label Grid.Row="0" Grid.Column="1" Content="{Binding JiraKey}"/>
-
                         <Label Grid.Row="0" Grid.Column="2" FontWeight="Bold" Style="{StaticResource GridField}">Status:</Label>
                         <Label Grid.Row="0" Grid.Column="3" Content="{Binding Status}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" FontWeight="Bold" Style="{StaticResource GridField}">Sprint:</Label>
+                        <Label Grid.Row="1" Grid.Column="1" Content="{Binding SprintId}"/>
                     </Grid>
                 </StackPanel>
             </StackPanel>
@@ -86,11 +94,12 @@
 
     <GroupBox Header="{Binding BoardName, FallbackValue=BoardName}">
         <ListBox ItemsSource="{Binding ItemsList}"
+                 SelectedItem="{Binding SelectedItem}"
                  VerticalContentAlignment="Stretch"
                  HorizontalContentAlignment="Stretch"
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                  ItemTemplate="{StaticResource ListBoxItemTemplate}"
-                 
+                 MouseDoubleClick="ListBox_MouseDoubleClick"
                  MouseMove="ListBox_MouseMove"
                  Drop="ListBox_Drop" AllowDrop="True"
                  >

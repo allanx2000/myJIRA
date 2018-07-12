@@ -9,7 +9,7 @@ namespace myJIRA.ViewModels
     internal class SettingsWindowViewModel : Innouvous.Utils.Merged45.MVVM45.ViewModel
     {
         private SettingsWindow settingsWindow;
-        
+
 
         public SettingsWindowViewModel(SettingsWindow settingsWindow)
         {
@@ -59,6 +59,30 @@ namespace myJIRA.ViewModels
             }
         }
 
+
+
+        public ICommand SelectBrowserCommand
+        {
+            get => new CommandHelper(SelectBrowser);
+        }
+
+        private void SelectBrowser()
+        {
+            try
+            {
+                var dlg = DialogsUtility.CreateOpenFileDialog();
+                DialogsUtility.AddExtension(dlg, "Application (*.exe)", "*.exe");
+
+                dlg.ShowDialog();
+
+                if (!string.IsNullOrEmpty(dlg.FileName))
+                    CustomBrowserPath = dlg.FileName;
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
+        }
         public ICommand SelectDBCommand
         {
             get => new CommandHelper(SelectDB);
@@ -81,12 +105,12 @@ namespace myJIRA.ViewModels
                 MessageBoxFactory.ShowError(e);
             }
         }
-        
+
         public ICommand CancelCommand
         {
             get => new CommandHelper(() => settingsWindow.Close());
         }
-        
+
         public ICommand SaveCommand
         {
             get => new CommandHelper(SaveSettings);
@@ -101,7 +125,7 @@ namespace myJIRA.ViewModels
                 {
                     throw new Exception("Database is required.");
                 }
-                
+
                 try
                 {
                     FileInfo fi = new FileInfo(DBPath);

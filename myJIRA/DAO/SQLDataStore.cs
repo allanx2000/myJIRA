@@ -124,7 +124,7 @@ namespace myJIRA.DAO
 
         public List<JIRAItem> LoadOpenJIRAs()
         {
-            string cmd = string.Format("select * from {0} where done_date is null AND archived_date is null", Jiras);
+            string cmd = string.Format("select * from {0} where archived_date is null", Jiras);
             var results = client.ExecuteSelect(cmd);
 
             var list = new List<JIRAItem>();
@@ -141,6 +141,8 @@ namespace myJIRA.DAO
         {
             JIRAItem jira = new JIRAItem();
 
+            jira.ID = Convert.ToInt32(r["id"]);
+
             if (!SQLUtils.IsNull(r["archived_date"]))
                 jira.ArchivedDate = SQLUtils.ToDateTime(r["archived_date"].ToString());
 
@@ -152,8 +154,7 @@ namespace myJIRA.DAO
             if (!SQLUtils.IsNull(r["done_date"]))
                 jira.DoneDate = SQLUtils.ToDateTime(r["done_date"].ToString());
 
-            jira.ID = jira.BoardId = Convert.ToInt32(r["id"]);
-
+            
             jira.ImportedDate = jira.CreatedDate; //TODO: Track or remove? Need to add to DB
 
             jira.JiraKey = r["jira_key"].ToString();
@@ -213,19 +214,6 @@ namespace myJIRA.DAO
 
         public void UpsertJIRA(JIRAItem jira)
         {
-            /*
-             * id	integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-	notes text,
-	archived_date text,
-	done_date text,
-	board_id integer,
-	
-	        created_date text NOT NULL,
-            title text not null,
-	jira_key text not varchar(100),
-	sprint_id text,
-    status varchar(100),
-	*/
             string cmd;
             if (jira.ID == null) //New
             {

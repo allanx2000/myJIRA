@@ -31,8 +31,8 @@ namespace myJIRA.ViewModels
                 Status = existing.Status;
                 JiraTitle = existing.Title;
                 
-                IsDone = existing.DoneDate == null;
-                IsArchived = existing.ArchivedDate == null;
+                IsDone = existing.DoneDate != null;
+                IsArchived = existing.ArchivedDate != null;
             }
         }
         
@@ -65,9 +65,10 @@ namespace myJIRA.ViewModels
                 if (existing != null)
                 {
                     item.ID = existing.ID;
-                    //item.BoardId = existing.BoardId;
+                    item.BoardId = existing.BoardId;
                     item.ArchivedDate = existing.ArchivedDate;
                     item.DoneDate = existing.DoneDate;
+                    item.CreatedDate = existing.CreatedDate;
                 }
                 else
                     item.CreatedDate = DateTime.Today;
