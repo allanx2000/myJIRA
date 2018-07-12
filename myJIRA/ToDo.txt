@@ -1,1 +1,3 @@
 ﻿Set custom selected color
+
+Sprint and Status Value lookup
