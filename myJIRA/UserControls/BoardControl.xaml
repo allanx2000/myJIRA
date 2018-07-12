@@ -36,7 +36,7 @@
                         </Style>
                     </StackPanel.Style>
 
-                    <Grid DataContext="{Binding Data}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="5"/>
@@ -46,15 +46,15 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0">
-                            <TextBlock TextWrapping="Wrap" Text="{Binding Title, FallbackValue=Title}"/>
-                        </Label> 
-                        
-                        <Label Grid.Column="2" Background="LightGreen">
-                            <TextBlock  Text="{Binding SprintId}"/>
+                            <TextBlock TextWrapping="Wrap"  DataContext="{Binding Data}" Text="{Binding Title, FallbackValue=Title}"/>
                         </Label>
 
-                        <Label Grid.Column="4" Background="LightPink">
-                            <TextBlock  Text="{Binding Status}"/>
+                        <Label Grid.Column="2" Background="LightGreen" Visibility="{Binding SprintVisibility}">
+                            <TextBlock  DataContext="{Binding Data}" Text="{Binding SprintId}"/>
+                        </Label>
+
+                        <Label Grid.Column="4" Background="LightPink" Visibility="{Binding StatusVisibility}">
+                            <TextBlock  DataContext="{Binding Data}" Text="{Binding Status}"/>
                         </Label>
 
                     </Grid>

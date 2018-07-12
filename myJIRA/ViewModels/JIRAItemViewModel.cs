@@ -3,6 +3,7 @@ using myJIRA.Models;
 using System.Windows.Input;
 using System;
 using Innouvous.Utils;
+using System.Windows;
 
 namespace myJIRA.ViewModels
 {   public class JIRAItemViewModel : Innouvous.Utils.Merged45.MVVM45.ViewModel
@@ -29,6 +30,15 @@ namespace myJIRA.ViewModels
             }
         }
 
+        public Visibility StatusVisibility
+        {
+            get => string.IsNullOrEmpty(item.Status) ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public Visibility SprintVisibility
+        {
+            get => string.IsNullOrEmpty(item.Status) ? Visibility.Collapsed : Visibility.Visible;
+        }
 
         public ICommand EditCommand
         {
