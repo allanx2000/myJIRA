@@ -52,6 +52,28 @@ namespace myJIRA.ViewModels
                 MessageBoxFactory.ShowError(e);
             }
         }
+        
+        public ICommand DeleteCommand
+        {
+            get => new CommandHelper(DeleteJira);
+        }
+
+        private void DeleteJira()
+        {
+            try
+            {
+                var confirm = MessageBoxFactory.ShowConfirmAsBool("Delete JIRA: " + item.Title + "?", "Confirm Delete");
+                if (confirm)
+                {
+                    AppStateManager.DataStore.DeleteJIRA(item.ID.Value);
+                    AppStateManager.ReloadOpenJIRAs();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
+        }
 
     }
 }
