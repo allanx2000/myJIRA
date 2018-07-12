@@ -5,6 +5,7 @@ using myJIRA.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
+using System.Windows.Controls;
 
 namespace myJIRA
 {
@@ -33,9 +34,9 @@ namespace myJIRA
             openJiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
 
             var first = BoardControl.CreateFirstBoard("Not Started", openJiras);
-            ConfigureBoardControl(first);
+            ConfigureBoardControl(mainWindow, first);
             var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
-            ConfigureBoardControl(last);
+            ConfigureBoardControl(mainWindow, last);
 
             boardControls = new List<BoardControl>();
             boardControls.Add(first);
@@ -45,7 +46,7 @@ namespace myJIRA
                 BoardControl boardControl = new BoardControl(
                     b, openJiras);
 
-                ConfigureBoardControl(boardControl);
+                ConfigureBoardControl(mainWindow, boardControl);
 
                 boardControls.Add(boardControl);
             }
@@ -56,9 +57,10 @@ namespace myJIRA
                 kb.Children.Add(b);
         }
 
-        private static void ConfigureBoardControl(BoardControl bc)
+        private static void ConfigureBoardControl(MainWindow window, BoardControl bc)
         {
-            bc.MinHeight = 200;
+            bc.Height = 200;
+            //bc.SetBinding(BoardControl.WidthProperty, boardWidth);
         }
 
         private static DataStore GetDataStore()
