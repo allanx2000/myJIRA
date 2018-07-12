@@ -59,7 +59,8 @@ namespace myJIRA
 
         private static void ConfigureBoardControl(MainWindow window, BoardControl bc)
         {
-            bc.Height = 200;
+            bc.MinHeight = 200;
+            bc.MaxHeight = 800;
             //bc.SetBinding(BoardControl.WidthProperty, boardWidth);
         }
 

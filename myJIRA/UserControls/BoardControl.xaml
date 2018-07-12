@@ -10,15 +10,15 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxItemTemplate">
-
-            <!-- Collapsed -->
-            <StackPanel>
+            <StackPanel Margin="0 0 0 10">
                 <StackPanel.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Edit" Command="{Binding EditCommand}"/>
                         <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
                     </ContextMenu>
                 </StackPanel.ContextMenu>
+
+                <!-- Collapsed -->
                 <StackPanel>
                     <StackPanel.Style>
                         <Style TargetType="{x:Type StackPanel}">
