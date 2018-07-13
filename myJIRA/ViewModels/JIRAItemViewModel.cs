@@ -42,7 +42,7 @@ namespace myJIRA.ViewModels
 
         public Visibility SprintVisibility
         {
-            get => string.IsNullOrEmpty(item.Status) ? Visibility.Collapsed : Visibility.Visible;
+            get => string.IsNullOrEmpty(item.SprintId) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public ICommand EditCommand

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
 using System.Windows.Controls;
+using Innouvous.Utils.MVVM;
 
 namespace myJIRA
 {
@@ -55,6 +56,25 @@ namespace myJIRA
 
             foreach (var b in boardControls)
                 kb.Children.Add(b);
+
+            //TODO: Archive Button
+            Button archiveButton = new Button()
+            {
+                Content = "Archive",
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                Command = new CommandHelper(() => DoArchive(openJiras))
+            };
+
+            kb.Children.Add(archiveButton);
+        }
+
+        private static void DoArchive(ObservableCollection<JIRAItemViewModel> openJiras)
+        {
+            /*
+             * -Find the JIRAs in Ready to release
+             * -Mark them as Archived
+             * -Refresh boards
+             */ 
         }
 
         private static void ConfigureBoardControl(MainWindow window, BoardControl bc)
