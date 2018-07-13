@@ -17,6 +17,7 @@ namespace myJIRA.DAO
         //Tables Names
         private const string Boards = "tbl_boards";
         private const string Jiras = "tbl_jiras";
+        private const string Aux = "tbl_aux";
 
 
         public SQLDataStore(string path)
@@ -29,12 +30,8 @@ namespace myJIRA.DAO
 
             client = new SQLiteClient(path, isNew, args);
 
-            if (!TableExists(Boards)) //TODO: Fix in SQLUtils
-            {
-                CreateTables();
-            }
-
-            //AddTestBoards();
+            CreateTables();
+            
         }
 
         private bool TableExists(string name)
@@ -57,8 +54,27 @@ namespace myJIRA.DAO
         #region Create Tables
         private void CreateTables()
         {
-            CreateBoardTable();
-            CreateJiraTable();
+            if (!TableExists(Boards)) //TODO: Fix in SQLUtils
+            {
+                CreateBoardTable();
+            }
+
+            if (!TableExists(Jiras))
+            {
+                CreateJiraTable();
+            }
+
+            if (!TableExists(Aux))
+            {
+                CreateAuxTable();
+            }
+
+        }
+
+        private void CreateAuxTable()
+        {
+            string cmd = LoadFT("CreateAuxTable");
+            client.ExecuteNonQuery(cmd);
         }
 
         private void CreateJiraTable()
@@ -168,7 +184,38 @@ namespace myJIRA.DAO
             jira.Status = r["status"].ToString();
             jira.Title = r["title"].ToString();
 
+            //Aux
+            Dictionary<AuxFields, object> aux = GetAuxFields(jira.ID.Value);
+
             return jira;
+        }
+
+        private Dictionary<AuxFields, object> GetAuxFields(int jiraId)
+        {
+            string sql = "select * from {0} where jira_id = {1}";
+            sql = string.Format(sql, Aux, jiraId);
+
+            Dictionary<AuxFields, object> aux = new Dictionary<AuxFields, object>();
+
+            var dt = client.ExecuteSelect(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                AuxFields key = (AuxFields)row["aux_id"];
+
+                object value;
+
+                switch (key)
+                {
+                    default:
+                        value = row["val"].ToString();
+                        break;
+                }
+
+                aux[key] = value;
+            }
+
+            return aux;
         }
 
         public void UpsertBoards(List<BoardName> boards)
@@ -214,6 +261,8 @@ namespace myJIRA.DAO
 
         public void UpsertJIRA(JIRAItem jira)
         {
+            int jiraId;
+
             string cmd;
             if (jira.ID == null) //New
             {
@@ -229,6 +278,8 @@ namespace myJIRA.DAO
                     ToStringOrNull(jira.SprintId),
                     ToStringOrNull(jira.Status)
                     );
+
+                jiraId = SQLUtils.GetLastInsertRow(client);
             }
             else //Update
             {
@@ -252,9 +303,25 @@ namespace myJIRA.DAO
                     ToStringOrNull(jira.Status),
                     jira.ID.Value
                     );
+
+                jiraId = jira.ID.Value;
             }
 
             client.ExecuteNonQuery(cmd);
+
+            UpsertAux(jiraId, jira.GetAuxFields());
+        }
+
+        private const string UpsertAuxQuery = "insert into {0} values({1},{2},'{3}'";
+        private void UpsertAux(int jiraId, Dictionary<AuxFields, object> aux)
+        {
+            client.ExecuteNonQuery("delete from " + Aux + " where jira_id = " + jiraId);
+            
+            foreach (var kv in aux)
+            {
+                string cmd = string.Format(UpsertAuxQuery, Aux, jiraId, (int)kv.Key, kv.Value.ToString());
+                client.ExecuteNonQuery(cmd);
+            }
         }
 
         private const string NULL = "NULL";

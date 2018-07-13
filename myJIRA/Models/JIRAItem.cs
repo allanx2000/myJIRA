@@ -54,10 +54,24 @@ namespace myJIRA.Models
         /// </summary>
         public DateTime CreatedDate { get; set; }
 
-        internal JIRAItem Clone()
+
+        private Dictionary<AuxFields, object> aux = new Dictionary<AuxFields, object>();
+
+        public void SetAuxField(AuxFields key, object value)
         {
-            throw new NotImplementedException();
+            aux[key] = value;
         }
+
+        public object GetAuxField(AuxFields key)
+        {
+            return aux.ContainsKey(key)? aux[key] : null;
+        }
+
+        public Dictionary<AuxFields, object> GetAuxFields()
+        {
+            return aux;
+        }
+        
 
         #endregion
     }

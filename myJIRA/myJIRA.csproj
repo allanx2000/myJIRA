@@ -98,6 +98,7 @@
     <Compile Include="ManageBoardsWindow.xaml.cs">
       <DependentUpon>ManageBoardsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuxFields.cs" />
     <Compile Include="UserControls\BoardControlViewModel.cs" />
     <Compile Include="ViewModels\BoardNameItemViewModel.cs" />
     <Compile Include="ViewModels\EditBoardWindowViewModel.cs" />
@@ -182,6 +183,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TableScripts\CreateAuxTable.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TableScripts\CreateJIRATable.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

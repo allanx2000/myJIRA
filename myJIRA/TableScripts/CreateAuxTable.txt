@@ -1,0 +1,12 @@
+﻿create table tbl_aux (
+	jira_id integer NOT NULL,
+	aux_id integer NOT NULL,
+	val text,
+	
+	UNIQUE (jira_id, aux_id) ON CONFLICT REPLACE,
+
+	FOREIGN KEY (jira_id)
+		REFERENCES tbl_jiras(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+)
