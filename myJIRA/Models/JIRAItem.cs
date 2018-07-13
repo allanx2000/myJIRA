@@ -71,7 +71,12 @@ namespace myJIRA.Models
         {
             return aux;
         }
-        
+
+        internal void SetAuxField(Dictionary<AuxFields, object> aux)
+        {
+            this.aux = aux;
+        }
+
 
         #endregion
     }

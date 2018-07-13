@@ -186,6 +186,7 @@ namespace myJIRA.DAO
 
             //Aux
             Dictionary<AuxFields, object> aux = GetAuxFields(jira.ID.Value);
+            jira.SetAuxField(aux);
 
             return jira;
         }
@@ -201,7 +202,7 @@ namespace myJIRA.DAO
 
             foreach (DataRow row in dt.Rows)
             {
-                AuxFields key = (AuxFields)row["aux_id"];
+                AuxFields key = (AuxFields) Convert.ToInt32(row["aux_id"]);
 
                 object value;
 
@@ -312,7 +313,7 @@ namespace myJIRA.DAO
             UpsertAux(jiraId, jira.GetAuxFields());
         }
 
-        private const string UpsertAuxQuery = "insert into {0} values({1},{2},'{3}'";
+        private const string UpsertAuxQuery = "insert into {0} values({1},{2},'{3}')";
         private void UpsertAux(int jiraId, Dictionary<AuxFields, object> aux)
         {
             client.ExecuteNonQuery("delete from " + Aux + " where jira_id = " + jiraId);

@@ -19,6 +19,11 @@ namespace myJIRA.ViewModels
         {
             RaisePropertyChanged("Data");
         }
+        
+        public string Epic
+        {
+            get => Data.GetAuxField(AuxFields.Epic) as string;
+        }
 
         public JIRAItem Data
         {

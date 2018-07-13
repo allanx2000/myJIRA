@@ -1,3 +1,5 @@
 ﻿Set custom selected color
 
 Sprint and Status Value lookup
+
+Add Aux datatable to editor or just the Epic field

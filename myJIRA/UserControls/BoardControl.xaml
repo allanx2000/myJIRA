@@ -43,17 +43,24 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0">
                             <TextBlock TextWrapping="Wrap" Text="{Binding Title, FallbackValue=Title}"/>
                         </Label>
 
-                        <Label Grid.Column="2" Background="LightGreen" Visibility="{Binding DataContext.SprintVisibility, ElementName=Container}">
+
+                        <Label Grid.Column="2" Background="LightBlue">
+                            <TextBlock  Text="{Binding DataContext.Epic, ElementName=Container}"/>
+                        </Label>
+                        
+                        <Label Grid.Column="4" Background="LightGreen" Visibility="{Binding DataContext.SprintVisibility, ElementName=Container}">
                             <TextBlock  Text="{Binding SprintId}"/>
                         </Label>
 
-                        <Label Grid.Column="4" Background="LightPink" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
+                        <Label Grid.Column="6" Background="LightPink" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
                             <TextBlock  Text="{Binding Status}"/>
                         </Label>
 
@@ -102,15 +109,19 @@
                             <TextBlock TextWrapping="Wrap" Text="{Binding JiraKey}"/>
                         </Label>
 
-
-                        <Label Grid.Row="0" Grid.Column="2" FontWeight="Bold" Style="{StaticResource GridField}">Status:</Label>
+                        <Label Grid.Row="0" Grid.Column="2" FontWeight="Bold" Style="{StaticResource GridField}">Epic:</Label>
                         <Label Grid.Row="0" Grid.Column="3">
-                            <TextBlock TextWrapping="Wrap" Text="{Binding Status}"/>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.Epic, ElementName=Container}"/>
                         </Label>
                         
                         <Label Grid.Row="1" Grid.Column="0" FontWeight="Bold" Style="{StaticResource GridField}">Sprint:</Label>
                         <Label Grid.Row="1" Grid.Column="1">
                             <TextBlock TextWrapping="Wrap" Text="{Binding SprintId}"/>
+                        </Label>
+
+                        <Label Grid.Row="1" Grid.Column="2" FontWeight="Bold" Style="{StaticResource GridField}">Status:</Label>
+                        <Label Grid.Row="1" Grid.Column="3">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Status}"/>
                         </Label>
                     </Grid>
                 </StackPanel>

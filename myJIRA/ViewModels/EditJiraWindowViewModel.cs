@@ -33,6 +33,8 @@ namespace myJIRA.ViewModels
                 
                 IsDone = existing.DoneDate != null;
                 IsArchived = existing.ArchivedDate != null;
+
+                Epic = existing.GetAuxField(AuxFields.Epic) as string;
             }
         }
         
@@ -47,6 +49,7 @@ namespace myJIRA.ViewModels
         public bool IsDone { get; set; }
         public bool IsArchived { get; set; }
 
+        public string Epic { get; set; }
 
         public ICommand SaveCommand { get => new CommandHelper(Save); }
 
@@ -79,6 +82,7 @@ namespace myJIRA.ViewModels
                 item.SprintId = SprintId;
                 item.Status = Status;
                 item.Title = JiraTitle;
+                item.SetAuxField(AuxFields.Epic, Epic);
                 
                 if (IsDone)
                 {
