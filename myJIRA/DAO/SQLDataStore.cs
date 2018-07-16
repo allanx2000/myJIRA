@@ -317,7 +317,10 @@ namespace myJIRA.DAO
         private void UpsertAux(int jiraId, Dictionary<AuxFields, object> aux)
         {
             client.ExecuteNonQuery("delete from " + Aux + " where jira_id = " + jiraId);
-            
+
+            if (aux == null) //VM may set it to null?
+                return;
+
             foreach (var kv in aux)
             {
                 string cmd = string.Format(UpsertAuxQuery, Aux, jiraId, (int)kv.Key, kv.Value.ToString());

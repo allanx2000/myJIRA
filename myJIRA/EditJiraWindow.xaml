@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
-        Title="{Binding Title, FallbackValue=EditJIRAWindow}" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner">
+        Title="{Binding Title, FallbackValue=EditJIRAWindow}" Width="500" SizeToContent="Height" WindowStartupLocation="CenterOwner">
     <Grid>
 
         <!--
@@ -25,36 +25,54 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource GridField}">JIRA Key: </Label>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding JiraKey}"/>
-
-        <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource GridField}">Epic:</Label>
-        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Epic}"/>
 
 
-        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource GridField}">Description: </Label>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding JiraTitle}"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource GridField}">Sprint: </Label>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SprintId}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <Label Grid.Row="2" Grid.Column="2" Style="{StaticResource GridField}">Status: </Label>
-        <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Status}"/>
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource GridField}">JIRA Key:</Label>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding JiraKey}"/>
 
-        <GroupBox Grid.Row="3" Grid.ColumnSpan="4" Header="Notes">
-            <TextBox Height="300" AcceptsReturn="True" AcceptsTab="True" 
+            <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource GridField}">Epic:</Label>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Epic}"/>
+
+
+            <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource GridField}">Description:</Label>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding JiraTitle}"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource GridField}">Sprint:</Label>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SprintId}"/>
+
+            <Label Grid.Row="2" Grid.Column="2" Style="{StaticResource GridField}">Status:</Label>
+            <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Status}"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource GridField}" ToolTip="Estimated Time ">Est. Time: </Label>
+            <TextBox Grid.Row="3" Grid.Column="1" Width="60" MaxLength="4" HorizontalAlignment="Left" Text="{Binding TimeEstimate}"/>
+
+            <GroupBox Grid.Row="4" Grid.ColumnSpan="4" Header="Notes">
+                <TextBox Height="300" AcceptsReturn="True" AcceptsTab="True" 
                      Text="{Binding Notes}"
                      HorizontalContentAlignment="Left" VerticalContentAlignment="Top"
                      ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-        </GroupBox>
+            </GroupBox>
+        </Grid>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
             <CheckBox IsChecked="{Binding IsDone}">Done</CheckBox>
             <CheckBox IsChecked="{Binding IsArchived}">Archived</CheckBox>
         </StackPanel>

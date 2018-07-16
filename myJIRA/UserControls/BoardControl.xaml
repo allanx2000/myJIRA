@@ -45,6 +45,8 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="5"/>
                             <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="5"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0">
@@ -56,14 +58,17 @@
                             <TextBlock  Text="{Binding DataContext.Epic, ElementName=Container}"/>
                         </Label>
                         
-                        <Label Grid.Column="4" Background="LightGreen" Visibility="{Binding DataContext.SprintVisibility, ElementName=Container}">
+                        <Label Grid.Column="4" Background="LightGray">
+                            <TextBlock  Text="{Binding DataContext.TimeEstimate, ElementName=Container}"/>
+                        </Label>
+
+                        <Label Grid.Column="6" Background="LightGreen" Visibility="{Binding DataContext.SprintVisibility, ElementName=Container}">
                             <TextBlock  Text="{Binding SprintId}"/>
                         </Label>
 
-                        <Label Grid.Column="6" Background="LightPink" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
+                        <Label Grid.Column="8" Background="LightPink" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
                             <TextBlock  Text="{Binding Status}"/>
                         </Label>
-
                     </Grid>
                  </StackPanel>
 
@@ -102,6 +107,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Style="{StaticResource GridField}">Key:</Label>
@@ -122,6 +128,11 @@
                         <Label Grid.Row="1" Grid.Column="2" FontWeight="Bold" Style="{StaticResource GridField}">Status:</Label>
                         <Label Grid.Row="1" Grid.Column="3">
                             <TextBlock TextWrapping="Wrap" Text="{Binding Status}"/>
+                        </Label>
+
+                        <Label Grid.Row="2" Grid.Column="0" FontWeight="Bold" Style="{StaticResource GridField}">Est. Time:</Label>
+                        <Label Grid.Row="2" Grid.Column="1">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.TimeEstimate, ElementName=Container}"/>
                         </Label>
                     </Grid>
                 </StackPanel>

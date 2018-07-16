@@ -19,11 +19,20 @@ namespace myJIRA.ViewModels
         {
             RaisePropertyChanged("Data");
         }
-        
+
+        #region AuxFields Getters
+
         public string Epic
         {
             get => Data.GetAuxField(AuxFields.Epic) as string;
         }
+
+        public string TimeEstimate
+        {
+            get => Data.GetAuxField(AuxFields.TimeEstimate) as string;
+        }
+
+        #endregion
 
         public JIRAItem Data
         {

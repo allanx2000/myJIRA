@@ -35,6 +35,7 @@ namespace myJIRA.ViewModels
                 IsArchived = existing.ArchivedDate != null;
 
                 Epic = existing.GetAuxField(AuxFields.Epic) as string;
+                TimeEstimate = existing.GetAuxField(AuxFields.TimeEstimate) as string;
             }
         }
         
@@ -50,6 +51,7 @@ namespace myJIRA.ViewModels
         public bool IsArchived { get; set; }
 
         public string Epic { get; set; }
+        public string TimeEstimate { get; set; }
 
         public ICommand SaveCommand { get => new CommandHelper(Save); }
 
@@ -83,7 +85,8 @@ namespace myJIRA.ViewModels
                 item.Status = Status;
                 item.Title = JiraTitle;
                 item.SetAuxField(AuxFields.Epic, Epic);
-                
+                item.SetAuxField(AuxFields.TimeEstimate, TimeEstimate);
+
                 if (IsDone)
                 {
                     if (item.DoneDate == null)
