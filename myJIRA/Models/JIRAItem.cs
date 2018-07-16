@@ -10,9 +10,9 @@ namespace myJIRA.Models
     public class JIRAItem : Innouvous.Utils.Merged45.MVVM45.ViewModel
     {
         public int? ID { get; set; }
-     
+
         public string Notes { get; set; }
-        
+
         /// <summary>
         /// Date the item was imported or updated
         /// </summary>
@@ -21,7 +21,7 @@ namespace myJIRA.Models
         public DateTime? ArchivedDate { get; set; }
 
         public DateTime? DoneDate { get; internal set; }
-        
+
         public int? BoardId
         {
             get
@@ -59,12 +59,17 @@ namespace myJIRA.Models
 
         public void SetAuxField(AuxFields key, object value)
         {
-            aux[key] = value;
+            if (value == null ||
+                (value is string && string.IsNullOrEmpty((string)value))
+            )
+                aux.Remove(key);
+            else
+                aux[key] = value;
         }
 
         public object GetAuxField(AuxFields key)
         {
-            return aux.ContainsKey(key)? aux[key] : null;
+            return aux.ContainsKey(key) ? aux[key] : null;
         }
 
         public Dictionary<AuxFields, object> GetAuxFields()
@@ -72,9 +77,16 @@ namespace myJIRA.Models
             return aux;
         }
 
+        /// <summary>
+        /// Sets the AuxFields to a Dictionary
+        /// </summary>
+        /// <param name="aux"></param>
         internal void SetAuxField(Dictionary<AuxFields, object> aux)
         {
-            this.aux = aux;
+            if (aux != null)
+                this.aux = aux;
+            else
+                this.aux.Clear();
         }
 
 

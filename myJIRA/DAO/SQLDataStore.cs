@@ -318,7 +318,7 @@ namespace myJIRA.DAO
         {
             client.ExecuteNonQuery("delete from " + Aux + " where jira_id = " + jiraId);
 
-            if (aux == null) //VM may set it to null?
+            if (aux == null || aux.Count == 0)
                 return;
 
             foreach (var kv in aux)
