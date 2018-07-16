@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
         Title="Manage Boards" Height="300" Width="400" WindowStartupLocation="CenterOwner">
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}"></KeyBinding>
+    </Window.InputBindings>
+
     <DockPanel LastChildFill="True">
 
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">

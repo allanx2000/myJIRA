@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
         Title="{Binding Title, FallbackValue=EditBoardWindow}" Width="400" SizeToContent="Height" WindowStartupLocation="CenterOwner">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}"></KeyBinding>
+    </Window.InputBindings>
+    
     <Grid>
 
         <Grid.ColumnDefinitions>

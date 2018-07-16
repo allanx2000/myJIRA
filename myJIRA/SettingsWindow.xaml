@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
         Title="Settings" SizeToContent="Height" Width="300" WindowStartupLocation="CenterOwner">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding CancelCommand}"></KeyBinding>
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
