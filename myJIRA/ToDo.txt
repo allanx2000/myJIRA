@@ -2,4 +2,4 @@
 
 Sprint and Status Value lookup
 
-Add Aux datatable to editor or just the Epic field
+-Implement Archive/History Vuiew/Exorter

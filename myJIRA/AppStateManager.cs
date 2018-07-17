@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System;
 using System.Windows.Controls;
 using Innouvous.Utils.MVVM;
+using System.Linq;
 
 namespace myJIRA
 {
@@ -74,7 +75,20 @@ namespace myJIRA
              * -Find the JIRAs in Ready to release
              * -Mark them as Archived
              * -Refresh boards
-             */ 
+             */
+
+            var done = from x in openJiras where x.Data.DoneDate != null select x.Data;
+
+            if (done.Count() == 0)
+                return;
+
+            foreach (var x in done)
+            {
+                x.ArchivedDate = DateTime.Today;
+                ds.UpsertJIRA(x);
+            }
+
+            ReloadOpenJIRAs();
         }
 
         private static void ConfigureBoardControl(MainWindow window, BoardControl bc)
