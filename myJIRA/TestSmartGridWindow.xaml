@@ -1,0 +1,20 @@
+﻿<Window x:Class="myJIRA.TestSmartGridWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:myJIRA"
+        mc:Ignorable="d"
+        xmlns:ctrl="clr-namespace:myJIRA.UserControls"
+        Title="TestSmartGridWindow" Height="300" Width="300">
+    <ctrl:SmartGrid Orientation="Horizontal">
+        <ctrl:SmartGrid.SizeDefinitions>
+            <ctrl:SizeDefinition Size="Auto"/>
+            <ctrl:SizeDefinition Size="50"/>
+            <ctrl:SizeDefinition Size="*"/>
+            <ctrl:SizeDefinition Size="80"/>
+        </ctrl:SmartGrid.SizeDefinitions>
+        
+        
+    </ctrl:SmartGrid>
+</Window>

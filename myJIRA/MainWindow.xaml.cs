@@ -33,6 +33,9 @@ namespace myJIRA
             vm = new MainWindowViewModel(this);
             DataContext = vm;
 
+            //TestSmartGridWindow window = new TestSmartGridWindow();
+            //window.Show();
+
         }
     }
 }
