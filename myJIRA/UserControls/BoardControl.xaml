@@ -109,23 +109,23 @@
                                 <TextBlock TextWrapping="Wrap" Text="{Binding JiraKey}"/>
                             </Label>
 
-                            <Label Grid.Row="0" Grid.Column="2" FontWeight="Bold" Style="{StaticResource GridField}">Epic:</Label>
-                            <Label Grid.Row="0" Grid.Column="3">
+                            <Label FontWeight="Bold" Style="{StaticResource GridField}">Epic:</Label>
+                            <Label>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.Epic, ElementName=Container}"/>
                             </Label>
 
-                            <Label Grid.Row="1" Grid.Column="0" FontWeight="Bold" Style="{StaticResource GridField}">Sprint:</Label>
-                            <Label Grid.Row="1" Grid.Column="1">
+                            <Label FontWeight="Bold" Style="{StaticResource GridField}">Sprint:</Label>
+                            <Label>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding SprintId}"/>
                             </Label>
 
-                            <Label Grid.Row="1" Grid.Column="2" FontWeight="Bold" Style="{StaticResource GridField}">Status:</Label>
-                            <Label Grid.Row="1" Grid.Column="3">
+                            <Label FontWeight="Bold" Style="{StaticResource GridField}">Status:</Label>
+                            <Label>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding Status}"/>
                             </Label>
 
-                            <Label Grid.Row="2" Grid.Column="0" FontWeight="Bold" Style="{StaticResource GridField}">Est. Time:</Label>
-                            <Label Grid.Row="2" Grid.Column="1">
+                            <Label FontWeight="Bold" Style="{StaticResource GridField}">Est. Time:</Label>
+                            <Label>
                                 <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.TimeEstimate, ElementName=Container}"/>
                             </Label>
                         </uc:SmartGrid.Content>
