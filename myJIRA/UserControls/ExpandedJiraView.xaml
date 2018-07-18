@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="myJIRA.UserControls.ExpandedJiraView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:myJIRA.UserControls"
+             xmlns:uc="clr-namespace:myJIRA.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <!-- Make layout reusable -->
+
+    <StackPanel Orientation="Vertical">
+        <Label>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Title}"/>
+        </Label>
+
+        <uc:SmartGrid Margin="10 0 0 0" Orientation="Horizontal">
+            <uc:SmartGrid.SizeDefinitions>
+                <uc:SizeDefinition Size="Auto"/>
+                <uc:SizeDefinition Size="*"/>
+                <uc:SizeDefinition Size="Auto"/>
+                <uc:SizeDefinition Size="*"/>
+            </uc:SmartGrid.SizeDefinitions>
+
+            <uc:SmartGrid.Content>
+                <Label FontWeight="Bold" Style="{StaticResource GridField}">Key:</Label>
+                <Label>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding JiraKey}"/>
+                </Label>
+
+                <Label FontWeight="Bold" Style="{StaticResource GridField}">Epic:</Label>
+                <Label>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.Epic, ElementName=Container}"/>
+                </Label>
+
+                <Label FontWeight="Bold" Style="{StaticResource GridField}">Sprint:</Label>
+                <Label>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding SprintId}"/>
+                </Label>
+
+                <Label FontWeight="Bold" Style="{StaticResource GridField}">Status:</Label>
+                <Label>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Status}"/>
+                </Label>
+
+                <Label FontWeight="Bold" Style="{StaticResource GridField}">Est. Time:</Label>
+                <Label>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.TimeEstimate, ElementName=Container}"/>
+                </Label>
+            </uc:SmartGrid.Content>
+        </uc:SmartGrid>
+    </StackPanel>
+</UserControl>

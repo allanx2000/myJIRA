@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myJIRA"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:xc="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:uc="clr-namespace:myJIRA.UserControls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Title="Archived Viewer" Height="500" Width="600">
@@ -18,17 +20,11 @@
         </Grid.RowDefinitions>
 
         <GroupBox Grid.Row="0" Header="Completed Date">
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel.Resources>
 
-                <Grid.Resources>
+                    <sys:Double x:Key="SeperatorWidth">30</sys:Double>
+                    
                     <Style TargetType="xc:DateTimePicker">
                         <Setter Property="Width" Value="120"/>
                         <Setter Property="Margin" Value="5"/>
@@ -39,20 +35,36 @@
                         <Setter Property="TimePickerShowButtonSpinner" Value="False"/>
                         <Setter Property="TimePickerVisibility" Value="Hidden"/>
                     </Style>
-                </Grid.Resources>
+                </StackPanel.Resources>
 
-                <Label Grid.Column="0">From: </Label>
+                <Label>From:</Label>
                 <xc:DateTimePicker Grid.Column="1" Value="{Binding FromDate}" />
 
-                <Label Grid.Column="3">To: </Label>
+                <Label Width="{StaticResource SeperatorWidth}"/>
+                
+                <Label>To:</Label>
                 <xc:DateTimePicker Grid.Column="4" Value="{Binding ToDate}" />
-            </Grid>
+
+                <Label Width="{StaticResource SeperatorWidth}"/>
+                
+                <Button Command="{Binding LoadCommand}">Refresh</Button>
+            </StackPanel>
         </GroupBox>
         
         <GroupBox Header="JIRAs" Grid.Row="1">
             <DockPanel LastChildFill="True">
                 <Label DockPanel.Dock="Top" Content="{Binding ResultStatusText, FallbackValue=ResultStatusText}" Height="25"/>
-                <ListBox Margin="5" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"/>
+                <ListBox Margin="5" HorizontalContentAlignment="Stretch" 
+                         ItemsSource="{Binding Items}" 
+                         SelectedItem="{Binding SelectedItem}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <uc:ExpandedJiraView DataContext="{Binding Data}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                
+                </ListBox>
             </DockPanel>
         </GroupBox>
 

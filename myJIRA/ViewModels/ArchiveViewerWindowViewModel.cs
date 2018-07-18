@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Innouvous.Utils.MVVM;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace myJIRA.ViewModels
 {
@@ -22,6 +24,8 @@ namespace myJIRA.ViewModels
 
             FromDate = DateTime.Today.AddDays(-30);
             ToDate = DateTime.Today;
+
+            LoadResults();
         }
 
         public JIRAItemViewModel SelectedItem
@@ -48,12 +52,11 @@ namespace myJIRA.ViewModels
                 {
                     Set(value);
                     RaisePropertyChanged();
-
-                    //TODO: Move to Button
-                    LoadResults();
                 }
             }
         }
+
+        public ICommand LoadCommand { get => new CommandHelper(LoadResults); }
 
         public DateTime? ToDate
         {
@@ -64,8 +67,6 @@ namespace myJIRA.ViewModels
                 {
                     Set(value);
                     RaisePropertyChanged();
-
-                    LoadResults();
                 }
             }
         }
