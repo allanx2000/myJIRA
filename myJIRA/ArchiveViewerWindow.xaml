@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:myJIRA"
         xmlns:xc="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="Archived Viewer" Height="300" Width="500">
+        WindowStartupLocation="CenterOwner"
+        Title="Archived Viewer" Height="500" Width="600">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -41,15 +42,18 @@
                 </Grid.Resources>
 
                 <Label Grid.Column="0">From: </Label>
-                <xc:DateTimePicker Grid.Column="1" />
+                <xc:DateTimePicker Grid.Column="1" Value="{Binding FromDate}" />
 
                 <Label Grid.Column="3">To: </Label>
-                <xc:DateTimePicker Grid.Column="4" />
+                <xc:DateTimePicker Grid.Column="4" Value="{Binding ToDate}" />
             </Grid>
         </GroupBox>
         
         <GroupBox Header="JIRAs" Grid.Row="1">
-            <ListBox/>
+            <DockPanel LastChildFill="True">
+                <Label DockPanel.Dock="Top" Content="{Binding ResultStatusText, FallbackValue=ResultStatusText}" Height="25"/>
+                <ListBox Margin="5" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}"/>
+            </DockPanel>
         </GroupBox>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2"/>

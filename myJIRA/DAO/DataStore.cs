@@ -11,6 +11,8 @@ namespace myJIRA.DAO
     {
         List<JIRAItem> LoadOpenJIRAs();
         List<JIRAItem> LoadArchivedJIRAs(int archivedYear);
+        List<JIRAItem> LoadArchivedJIRAs(DateTime start, DateTime end);
+
 
         void UpsertJIRA(JIRAItem jira);
         void DeleteJIRA(int id);

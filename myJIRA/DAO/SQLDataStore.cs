@@ -135,7 +135,10 @@ namespace myJIRA.DAO
 
         public List<JIRAItem> LoadArchivedJIRAs(int archivedYear)
         {
-            throw new NotImplementedException();
+            DateTime start = new DateTime(archivedYear, 1, 1);
+            DateTime end = start.AddYears(1);
+
+            return LoadArchivedJIRAs(start, end);
         }
 
         public List<JIRAItem> LoadOpenJIRAs()
@@ -351,6 +354,25 @@ namespace myJIRA.DAO
                 throw new NotImplementedException();
 
             return "'" + raw + "'";
+        }
+
+        public List<JIRAItem> LoadArchivedJIRAs(DateTime start, DateTime end)
+        {
+            string sql = "select * from {0} where done_date <= '{1}' and done_date >= '{2}'";
+
+            sql = string.Format(sql,
+                Jiras, 
+                SQLUtils.ToSQLDateTime(end), 
+                SQLUtils.ToSQLDateTime(start));
+
+            var data = client.ExecuteSelect(sql);
+
+            List<JIRAItem> jiras = new List<JIRAItem>();
+
+            foreach (DataRow r in data.Rows)
+                jiras.Add(ParseJiraItem(r));
+
+            return jiras;
         }
     }
 }

@@ -65,5 +65,10 @@ namespace myJIRA.DAO
                 throw new NotSupportedException();
             }
         }
+
+        public List<JIRAItem> LoadArchivedJIRAs(DateTime value1, DateTime value2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

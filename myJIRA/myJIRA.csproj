@@ -128,6 +128,7 @@
     <Compile Include="UserControls\SmartGrid.xaml.cs">
       <DependentUpon>SmartGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ArchiveViewerWindowViewModel.cs" />
     <Compile Include="ViewModels\BoardNameItemViewModel.cs" />
     <Compile Include="ViewModels\EditBoardWindowViewModel.cs" />
     <Compile Include="ViewModels\EditJiraWindowViewModel.cs" />

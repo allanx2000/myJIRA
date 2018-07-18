@@ -1,4 +1,5 @@
-﻿using System;
+﻿using myJIRA.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,14 @@ namespace myJIRA
     /// </summary>
     public partial class ArchiveViewerWindow : Window
     {
+        private readonly ArchiveViewerWindowViewModel vm;
+
         public ArchiveViewerWindow()
         {
             InitializeComponent();
+
+            this.vm = new ArchiveViewerWindowViewModel(this);
+            DataContext = vm;
         }
     }
 }
