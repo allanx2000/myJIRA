@@ -1,0 +1,57 @@
+﻿<Window x:Class="myJIRA.ArchiveViewerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:myJIRA"
+        xmlns:xc="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        Title="Archived Viewer" Height="300" Width="500">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Header="Completed Date">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="xc:DateTimePicker">
+                        <Setter Property="Width" Value="120"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="ShowButtonSpinner" Value="False"/>
+                        <Setter Property="Format" Value="ShortDate"/>
+                        <Setter Property="TextAlignment" Value="Left"/>
+                        <Setter Property="AutoCloseCalendar" Value="True"/>
+                        <Setter Property="TimePickerShowButtonSpinner" Value="False"/>
+                        <Setter Property="TimePickerVisibility" Value="Hidden"/>
+                    </Style>
+                </Grid.Resources>
+
+                <Label Grid.Column="0">From: </Label>
+                <xc:DateTimePicker Grid.Column="1" />
+
+                <Label Grid.Column="3">To: </Label>
+                <xc:DateTimePicker Grid.Column="4" />
+            </Grid>
+        </GroupBox>
+        
+        <GroupBox Header="JIRAs" Grid.Row="1">
+            <ListBox/>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2"/>
+    </Grid>
+</Window>

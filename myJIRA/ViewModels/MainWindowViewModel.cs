@@ -93,6 +93,19 @@ namespace myJIRA.ViewModels
             }
         }
 
+        public ICommand OpenArchiveViewerCommand
+        {
+            get => new CommandHelper(OpenArchiveViewer);
+        }
+
+        private void OpenArchiveViewer()
+        {
+            var dlg = new ArchiveViewerWindow();
+            dlg.Owner = mainWindow;
+            dlg.ShowDialog();
+
+            AppStateManager.ReloadOpenJIRAs();
+        }
         
     }
 }

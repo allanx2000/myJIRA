@@ -31,7 +31,7 @@
                     <Separator/>
                     <MenuItem Header="App Settings" Command="{Binding OpenSettingsCommand}"/>
                 </MenuItem>
-                <MenuItem Header="View Archived"/>
+                <MenuItem Header="View Archived" Command="{Binding OpenArchiveViewerCommand}"/>
             </Menu>
 
             <Menu DockPanel.Dock="Right">
