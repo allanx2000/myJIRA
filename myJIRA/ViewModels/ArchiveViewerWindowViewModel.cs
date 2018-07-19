@@ -19,6 +19,7 @@ namespace myJIRA.ViewModels
 
             cvs = new CollectionViewSource();
             cvs.Source = items;
+            cvs.SortDescriptions.Add(new SortDescription("Data.DoneDate", ListSortDirection.Ascending));
 
             //TODO: Add Sort Descriptions
 

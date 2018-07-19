@@ -53,6 +53,13 @@
                 <Label>
                     <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource AuxConverter}, ConverterParameter=TimeEstimate}"/>
                 </Label>
+
+                <Label FontWeight="Bold" Style="{StaticResource GridField}">Archived: </Label>
+                <Label>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding ArchivedDate, StringFormat=d}"/>
+                </Label>
+
+
             </uc:SmartGrid.Content>
         </uc:SmartGrid>
     </StackPanel>
