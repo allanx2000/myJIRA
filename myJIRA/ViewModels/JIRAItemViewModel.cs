@@ -59,7 +59,7 @@ namespace myJIRA.ViewModels
             get => new CommandHelper(EditJira);
         }
 
-        private void EditJira()
+        public void EditJira()
         {
             try
             {
@@ -82,7 +82,7 @@ namespace myJIRA.ViewModels
             get => new CommandHelper(DeleteJira);
         }
 
-        private void DeleteJira()
+        public void DeleteJira()
         {
             try
             {

@@ -38,6 +38,30 @@ namespace myJIRA.ViewModels
             }
         }
 
+        public ICommand EditCommand
+        {
+            get => new CommandHelper(() =>
+            {
+                if (SelectedItem != null)
+                {
+                    SelectedItem.EditJira();
+                    LoadResults();
+                }
+            });
+        }
+
+        public ICommand DeleteCommand
+        {
+            get => new CommandHelper(() =>
+            {
+                if (SelectedItem != null)
+                {
+                    SelectedItem.DeleteJira();
+                    LoadResults();
+                }
+            });
+        }
+
         public ICollectionView Items
         {
             get => cvs.View;
@@ -55,8 +79,6 @@ namespace myJIRA.ViewModels
                 }
             }
         }
-
-        public ICommand LoadCommand { get => new CommandHelper(LoadResults); }
 
         public DateTime? ToDate
         {
@@ -80,6 +102,9 @@ namespace myJIRA.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+
+        public ICommand LoadCommand { get => new CommandHelper(LoadResults); }
 
         private void LoadResults()
         {

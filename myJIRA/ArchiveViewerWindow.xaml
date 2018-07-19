@@ -58,9 +58,17 @@
                          ItemsSource="{Binding Items}" 
                          SelectedItem="{Binding SelectedItem}">
 
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Command="{Binding EditCommand}"/>
+                            <MenuItem Header="Delete" Command="{Binding DeleteCommand}"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+
                     <ListBox.ItemTemplate>
+                        
                         <DataTemplate>
-                            <uc:ExpandedJiraView DataContext="{Binding Data}"/>
+                            <uc:ExpandedJiraView />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 

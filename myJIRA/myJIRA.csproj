@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Models\AuxFields.cs" />
     <Compile Include="TestSmartGridWindow.xaml.cs" />
+    <Compile Include="UserControls\AuxConverter.cs" />
     <Compile Include="UserControls\BoardControlViewModel.cs" />
     <Compile Include="UserControls\ExpandedJiraView.xaml.cs">
       <DependentUpon>ExpandedJiraView.xaml</DependentUpon>

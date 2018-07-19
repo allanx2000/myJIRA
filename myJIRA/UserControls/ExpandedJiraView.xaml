@@ -11,11 +11,16 @@
     <!-- Make layout reusable -->
 
     <StackPanel Orientation="Vertical">
+
+        <StackPanel.Resources>
+            <uc:AuxConverter x:Key="AuxConverter"/>
+        </StackPanel.Resources>
+        
         <Label>
-            <TextBlock TextWrapping="Wrap" Text="{Binding Title}"/>
+            <TextBlock TextWrapping="Wrap" DataContext="{Binding Data}" Text="{Binding Title}"/>
         </Label>
 
-        <uc:SmartGrid Margin="10 0 0 0" Orientation="Horizontal">
+        <uc:SmartGrid Margin="10 0 0 0" Orientation="Horizontal"  DataContext="{Binding Data}">
             <uc:SmartGrid.SizeDefinitions>
                 <uc:SizeDefinition Size="Auto"/>
                 <uc:SizeDefinition Size="*"/>
@@ -31,7 +36,7 @@
 
                 <Label FontWeight="Bold" Style="{StaticResource GridField}">Epic:</Label>
                 <Label>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.Epic, ElementName=Container}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource AuxConverter}, ConverterParameter=Epic}"/>
                 </Label>
 
                 <Label FontWeight="Bold" Style="{StaticResource GridField}">Sprint:</Label>
@@ -46,7 +51,7 @@
 
                 <Label FontWeight="Bold" Style="{StaticResource GridField}">Est. Time:</Label>
                 <Label>
-                    <TextBlock TextWrapping="Wrap" Text="{Binding DataContext.TimeEstimate, ElementName=Container}"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Converter={StaticResource AuxConverter}, ConverterParameter=TimeEstimate}"/>
                 </Label>
             </uc:SmartGrid.Content>
         </uc:SmartGrid>
