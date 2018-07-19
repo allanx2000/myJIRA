@@ -3,6 +3,8 @@ using myJIRA.Models;
 using Innouvous.Utils;
 using System.Windows.Input;
 using Innouvous.Utils.MVVM;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace myJIRA.ViewModels
 {
@@ -52,6 +54,9 @@ namespace myJIRA.ViewModels
 
         public string Epic { get; set; }
         public string TimeEstimate { get; set; }
+
+        public ICollection<string> Sprints { get => AppStateManager.Sprints; }
+        public ICollection<string> Epics { get => AppStateManager.Epics; }
 
         public ICommand SaveCommand { get => new CommandHelper(Save); }
 

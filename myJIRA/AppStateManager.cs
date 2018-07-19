@@ -17,7 +17,7 @@ namespace myJIRA
         public static Properties.Settings Settings { get => settings; }
 
 
-        private static ObservableCollection<JIRAItemViewModel> openJiras;
+        private static ObservableCollection<JIRAItemViewModel> openJiras = new ObservableCollection<JIRAItemViewModel>();
         private static List<BoardControl> boardControls;
         private static DataStore ds;
 
@@ -33,8 +33,8 @@ namespace myJIRA
 
             var boardNames = ds.GetBoards();
 
-            openJiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
-
+            ReloadOpenJIRAs();
+            
             var first = BoardControl.CreateFirstBoard("Not Started", openJiras);
             ConfigureBoardControl(mainWindow, first);
             var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
@@ -130,13 +130,27 @@ namespace myJIRA
             }
         }
 
+        private static SortedSet<string> sprints = new SortedSet<string>();
+        private static SortedSet<string> epics = new SortedSet<string>();
+
+        public static ICollection<string> Sprints { get => sprints; }
+        public static ICollection<string> Epics { get => epics; }
+
+
         public static void ReloadOpenJIRAs()
         {
             openJiras.Clear();
             var jiras = CreateViewModelsFromJIRAs(ds.LoadOpenJIRAs());
 
+            sprints.Clear();
+            epics.Clear();
+
             foreach (var j in jiras)
+            {
                 openJiras.Add(j);
+                sprints.Add(j.Data.SprintId);
+                epics.Add(j.Epic);
+            }
         }
     }
 }

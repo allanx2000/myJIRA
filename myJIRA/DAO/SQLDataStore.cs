@@ -265,7 +265,7 @@ namespace myJIRA.DAO
 
         public void UpsertJIRA(JIRAItem jira)
         {
-            int jiraId;
+            int? jiraId = null;
 
             string cmd;
             if (jira.ID == null) //New
@@ -282,8 +282,6 @@ namespace myJIRA.DAO
                     ToStringOrNull(jira.SprintId),
                     ToStringOrNull(jira.Status)
                     );
-
-                jiraId = SQLUtils.GetLastInsertRow(client);
             }
             else //Update
             {
@@ -313,7 +311,11 @@ namespace myJIRA.DAO
 
             client.ExecuteNonQuery(cmd);
 
-            UpsertAux(jiraId, jira.GetAuxFields());
+            if (jiraId == null)
+                jiraId = SQLUtils.GetLastInsertRow(client);
+
+
+            UpsertAux(jiraId.Value, jira.GetAuxFields());
         }
 
         private const string UpsertAuxQuery = "insert into {0} values({1},{2},'{3}')";
