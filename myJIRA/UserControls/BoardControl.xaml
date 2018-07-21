@@ -37,40 +37,49 @@
                     </StackPanel.Style>
 
                     <Grid DataContext="{Binding Data}">
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="5"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto" MaxWidth="150"/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Grid.Resources>
+                            <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                                <Setter Property="Margin" Value="4"/>
+                            </Style>
+                        </Grid.Resources>
+
+
+                        <Label Grid.Column="0" Grid.RowSpan="2" Margin="0" VerticalAlignment="Top">
                             <TextBlock TextWrapping="Wrap" Text="{Binding Title, FallbackValue=Title}"/>
                         </Label>
 
+                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            
+                            <Label Background="LightBlue">
+                                <TextBlock  Text="{Binding DataContext.Epic, ElementName=Container}"/>
+                            </Label>
 
-                        <Label Grid.Column="2" Background="LightBlue">
-                            <TextBlock  Text="{Binding DataContext.Epic, ElementName=Container}"/>
-                        </Label>
-                        
-                        <Label Grid.Column="4" Background="LightGray">
-                            <TextBlock  Text="{Binding DataContext.TimeEstimate, ElementName=Container}"/>
-                        </Label>
+                            <Label Background="LightGray">
+                                <TextBlock  Text="{Binding DataContext.TimeEstimate, ElementName=Container}"/>
+                            </Label>
 
-                        <Label Grid.Column="6" Background="LightGreen" Visibility="{Binding DataContext.SprintVisibility, ElementName=Container}">
-                            <TextBlock  Text="{Binding SprintId}"/>
-                        </Label>
+                            <Label Background="LightGreen" Visibility="{Binding DataContext.SprintVisibility, ElementName=Container}">
+                                <TextBlock  Text="{Binding SprintId}"/>
+                            </Label>
+                        </StackPanel>
 
-                        <Label Grid.Column="8" Background="LightPink" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
-                            <TextBlock  Text="{Binding Status}"/>
+                        <Label Grid.Column="1" Grid.Row="1" Background="LightPink"  MaxWidth="150" HorizontalAlignment="Left" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
+                            <TextBlock  Text="{Binding Status}" TextTrimming="CharacterEllipsis"/>
                         </Label>
                     </Grid>
-                 </StackPanel>
+                </StackPanel>
 
                 <!-- Expanded -->
                 <StackPanel Orientation="Vertical">
