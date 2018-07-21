@@ -94,5 +94,17 @@ namespace myJIRA.Properties {
                 this["SaveWindowSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int BoardOrientation {
+            get {
+                return ((int)(this["BoardOrientation"]));
+            }
+            set {
+                this["BoardOrientation"] = value;
+            }
+        }
     }
 }

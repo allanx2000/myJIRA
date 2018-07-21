@@ -35,6 +35,9 @@
                 <TextBox Text="{Binding CustomBrowserPath}"/>
             </DockPanel>
 
+            <Label Style="{StaticResource GridField}">Orientation:</Label>
+            <ComboBox ItemsSource="{Binding BoardOrientations}" SelectedItem="{Binding BoardOrientation}"/>
+
             <CheckBox Grid.Column="1" IsChecked="{Binding SaveWindowSize}">Save Window Size</CheckBox>
 
             <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">

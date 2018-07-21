@@ -41,7 +41,7 @@
             <Menu/>
         </DockPanel>
         
-        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"  VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto">
             <StackPanel Name="KanbanBoard" Orientation="Horizontal"/>
         </ScrollViewer>
 

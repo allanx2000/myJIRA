@@ -26,7 +26,8 @@ namespace myJIRA
         internal static void Initialize(MainWindow mainWindow)
         {
             var kb = mainWindow.KanbanBoard;
-            kb.Orientation = System.Windows.Controls.Orientation.Vertical;
+
+            kb.Orientation = BoardOrientation;
             kb.Children.Clear();
 
             ds = GetDataStore();
@@ -36,9 +37,9 @@ namespace myJIRA
             ReloadOpenJIRAs();
             
             var first = BoardControl.CreateFirstBoard("Not Started", openJiras);
-            ConfigureBoardControl(mainWindow, first);
+            ConfigureBoardControl(mainWindow, first, BoardOrientation);
             var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
-            ConfigureBoardControl(mainWindow, last);
+            ConfigureBoardControl(mainWindow, last, BoardOrientation);
 
             boardControls = new List<BoardControl>();
             boardControls.Add(first);
@@ -48,7 +49,7 @@ namespace myJIRA
                 BoardControl boardControl = new BoardControl(
                     b, openJiras);
 
-                ConfigureBoardControl(mainWindow, boardControl);
+                ConfigureBoardControl(mainWindow, boardControl, BoardOrientation);
 
                 boardControls.Add(boardControl);
             }
@@ -91,9 +92,12 @@ namespace myJIRA
             ReloadOpenJIRAs();
         }
 
-        private static void ConfigureBoardControl(MainWindow window, BoardControl bc)
+        private static void ConfigureBoardControl(MainWindow window, BoardControl bc, Orientation orientation)
         {
-            bc.Height = 400;
+            if (orientation == Orientation.Vertical)
+                bc.Height = 300;
+            else
+                bc.Width = 400;
             //bc.SetBinding(BoardControl.WidthProperty, boardWidth);
         }
 
@@ -135,7 +139,16 @@ namespace myJIRA
 
         public static ICollection<string> Sprints { get => sprints; }
         public static ICollection<string> Epics { get => epics; }
-
+        public static Orientation BoardOrientation {
+            get {
+                return (Orientation)Settings.BoardOrientation;
+            }
+            set
+            {
+                Settings.BoardOrientation = (int)value;
+                Settings.Save();
+            }
+        }
 
         public static void ReloadOpenJIRAs()
         {

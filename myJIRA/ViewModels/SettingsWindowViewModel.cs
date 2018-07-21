@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System;
 using Innouvous.Utils;
 using System.IO;
+using System.Windows.Controls;
 
 namespace myJIRA.ViewModels
 {
@@ -10,6 +11,12 @@ namespace myJIRA.ViewModels
     {
         private SettingsWindow settingsWindow;
 
+        public string BoardOrientation { get; set; }
+
+        public string[] BoardOrientations
+        {
+            get { return Enum.GetNames(typeof(Orientation)); }
+        }
 
         public SettingsWindowViewModel(SettingsWindow settingsWindow)
         {
@@ -26,6 +33,7 @@ namespace myJIRA.ViewModels
             ServerURL = settings.ServerUrl;
             CustomBrowserPath = settings.CustomBrowserPath;
             SaveWindowSize = settings.SaveWindowSize;
+            BoardOrientation = AppStateManager.BoardOrientation.ToString();
         }
 
         
@@ -147,6 +155,8 @@ namespace myJIRA.ViewModels
                 settings.ServerUrl = ServerURL;
                 settings.CustomBrowserPath = CustomBrowserPath;
                 settings.SaveWindowSize = SaveWindowSize;
+                
+                settings.BoardOrientation = (int)Enum.Parse(typeof(Orientation), BoardOrientation);
 
                 settings.Save();
 
