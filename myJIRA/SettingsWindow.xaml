@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myJIRA"
+        xmlns:uc="clr-namespace:myJIRA.UserControls"
         mc:Ignorable="d"
         Title="Settings" SizeToContent="Height" Width="300" WindowStartupLocation="CenterOwner">
 
@@ -11,38 +12,33 @@
         <KeyBinding Key="Esc" Command="{Binding CancelCommand}"></KeyBinding>
     </Window.InputBindings>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <uc:SmartGrid Orientation="Horizontal">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <uc:SmartGrid.SizeDefinitions>
+            <uc:SizeDefinition Size="Auto"/>
+            <uc:SizeDefinition Size="*"/>
+        </uc:SmartGrid.SizeDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource GridField}">Database: </Label>
-        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+        <uc:SmartGrid.Content>
+        <Label Style="{StaticResource GridField}">Database: </Label>
+        <DockPanel LastChildFill="True">
             <Button DockPanel.Dock="Right" Command="{Binding SelectDBCommand}">...</Button>
             <TextBox Text="{Binding DBPath}"/>
         </DockPanel>
 
-        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource GridField}">Server URL: </Label>
-        <TextBox Grid.Row="1" Grid.Column="1"  Text="{Binding ServerURL}"/>
+        <Label Style="{StaticResource GridField}">Server URL: </Label>
+        <TextBox Text="{Binding ServerURL}"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource GridField}">Browser:</Label>
-        <DockPanel Grid.Row="2" Grid.Column="1" LastChildFill="True">
+        <Label Style="{StaticResource GridField}">Browser:</Label>
+        <DockPanel LastChildFill="True">
             <Button DockPanel.Dock="Right" Command="{Binding SelectBrowserCommand}">...</Button>
             <TextBox Text="{Binding CustomBrowserPath}"/>
         </DockPanel>
 
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Command="{Binding SaveCommand}">Save</Button>
             <Button Command="{Binding CancelCommand}">Cancel</Button>
-        </StackPanel> 
-
-    </Grid>
+        </StackPanel>
+        </uc:SmartGrid.Content>
+    </uc:SmartGrid>
 </Window>

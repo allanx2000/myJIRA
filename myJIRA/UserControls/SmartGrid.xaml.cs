@@ -109,7 +109,7 @@ namespace myJIRA.UserControls
         private void AddElements(List<UIElement> items)
         {
             double knownSize = (double)SizeDefinitions.Count;
-            double maxAxis = Math.Ceiling(((double)items.Count) / knownSize);
+            double maxAxis = Math.Ceiling(((double)items.Count) / knownSize); //TODO: Check for Manual Rows/Cols, if > Max
 
             //Create Definitions
             for (int i = 0; i <= maxAxis; i++)
@@ -129,15 +129,37 @@ namespace myJIRA.UserControls
 
             foreach (var i in items)
             {
+                int inc = 1;
+
                 if (Orientation == Orientation.Horizontal)
                 {
-                    i.SetValue(Grid.ColumnProperty, known++);
-                    i.SetValue(Grid.RowProperty, unknown);
+                    var cs = i.GetValue(Grid.ColumnSpanProperty);
+                    if (cs is int)
+                        inc = (int) cs;
+
+                    if (Equals(i.GetValue(Grid.ColumnProperty), 0))
+                    {
+                        i.SetValue(Grid.ColumnProperty, known);
+                        known += inc;
+                    }
+
+                    if (Equals(i.GetValue(Grid.RowProperty), 0))
+                        i.SetValue(Grid.RowProperty, unknown);
                 }
                 else
                 {
-                    i.SetValue(Grid.RowProperty, known++);
-                    i.SetValue(Grid.RowProperty, unknown);
+                    var rs = i.GetValue(Grid.RowSpanProperty);
+                    if (rs is int)
+                        inc = (int)rs;
+
+                    if (Equals(i.GetValue(Grid.RowProperty),0))
+                    {
+                        i.SetValue(Grid.RowProperty, known);
+                        known += inc;
+                    }
+
+                    if (Equals(i.GetValue(Grid.ColumnProperty),0))
+                        i.SetValue(Grid.ColumnProperty, unknown);
                 }
 
                 GridControl.Children.Add(i);
