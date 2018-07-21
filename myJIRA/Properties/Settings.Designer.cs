@@ -58,5 +58,41 @@ namespace myJIRA.Properties {
                 this["ServerUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double LastHeight {
+            get {
+                return ((double)(this["LastHeight"]));
+            }
+            set {
+                this["LastHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double LastWidth {
+            get {
+                return ((double)(this["LastWidth"]));
+            }
+            set {
+                this["LastWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SaveWindowSize {
+            get {
+                return ((bool)(this["SaveWindowSize"]));
+            }
+            set {
+                this["SaveWindowSize"] = value;
+            }
+        }
     }
 }

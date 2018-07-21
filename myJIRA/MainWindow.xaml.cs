@@ -26,13 +26,34 @@ namespace myJIRA
     {
         private readonly ViewModels.MainWindowViewModel vm;
 
+        private readonly Properties.Settings Settings;
+
         public MainWindow()
         {
             InitializeComponent();
 
+            Settings = AppStateManager.Settings;
             vm = new MainWindowViewModel(this);
             DataContext = vm;
 
+            if (Settings.SaveWindowSize)
+            {
+                if (Settings.LastHeight != 0)
+                    Height = Settings.LastHeight;
+
+                if (Settings.LastWidth != 0)
+                    Width = Settings.LastWidth;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Settings.SaveWindowSize)
+            {
+                Settings.LastHeight = Height;
+                Settings.LastWidth = Width;
+                Settings.Save();
+            }
         }
     }
 }

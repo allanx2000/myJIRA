@@ -25,8 +25,10 @@ namespace myJIRA.ViewModels
             DBPath = settings.DBPath;
             ServerURL = settings.ServerUrl;
             CustomBrowserPath = settings.CustomBrowserPath;
+            SaveWindowSize = settings.SaveWindowSize;
         }
 
+        
         public bool Cancelled { get; private set; }
 
         public string DBPath
@@ -48,6 +50,8 @@ namespace myJIRA.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public bool SaveWindowSize { get; set; }
 
         public string CustomBrowserPath
         {
@@ -142,6 +146,8 @@ namespace myJIRA.ViewModels
                 settings.DBPath = DBPath;
                 settings.ServerUrl = ServerURL;
                 settings.CustomBrowserPath = CustomBrowserPath;
+                settings.SaveWindowSize = SaveWindowSize;
+
                 settings.Save();
 
                 Cancelled = false;

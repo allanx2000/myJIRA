@@ -20,25 +20,27 @@
         </uc:SmartGrid.SizeDefinitions>
 
         <uc:SmartGrid.Content>
-        <Label Style="{StaticResource GridField}">Database: </Label>
-        <DockPanel LastChildFill="True">
-            <Button DockPanel.Dock="Right" Command="{Binding SelectDBCommand}">...</Button>
-            <TextBox Text="{Binding DBPath}"/>
-        </DockPanel>
+            <Label Style="{StaticResource GridField}">Database:</Label>
+            <DockPanel LastChildFill="True">
+                <Button DockPanel.Dock="Right" Command="{Binding SelectDBCommand}">...</Button>
+                <TextBox Text="{Binding DBPath}"/>
+            </DockPanel>
 
-        <Label Style="{StaticResource GridField}">Server URL: </Label>
-        <TextBox Text="{Binding ServerURL}"/>
+            <Label Style="{StaticResource GridField}">Server URL:</Label>
+            <TextBox Text="{Binding ServerURL}"/>
 
-        <Label Style="{StaticResource GridField}">Browser:</Label>
-        <DockPanel LastChildFill="True">
-            <Button DockPanel.Dock="Right" Command="{Binding SelectBrowserCommand}">...</Button>
-            <TextBox Text="{Binding CustomBrowserPath}"/>
-        </DockPanel>
+            <Label Style="{StaticResource GridField}">Browser:</Label>
+            <DockPanel LastChildFill="True">
+                <Button DockPanel.Dock="Right" Command="{Binding SelectBrowserCommand}">...</Button>
+                <TextBox Text="{Binding CustomBrowserPath}"/>
+            </DockPanel>
 
-        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Command="{Binding SaveCommand}">Save</Button>
-            <Button Command="{Binding CancelCommand}">Cancel</Button>
-        </StackPanel>
+            <CheckBox Grid.Column="1" IsChecked="{Binding SaveWindowSize}">Save Window Size</CheckBox>
+
+            <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Command="{Binding SaveCommand}">Save</Button>
+                <Button Command="{Binding CancelCommand}">Cancel</Button>
+            </StackPanel>
         </uc:SmartGrid.Content>
     </uc:SmartGrid>
 </Window>

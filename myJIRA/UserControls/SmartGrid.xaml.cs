@@ -109,21 +109,9 @@ namespace myJIRA.UserControls
         private void AddElements(List<UIElement> items)
         {
             double knownSize = (double)SizeDefinitions.Count;
-            double maxAxis = Math.Ceiling(((double)items.Count) / knownSize); //TODO: Check for Manual Rows/Cols, if > Max
+            //double maxAxis = Math.Ceiling(((double)items.Count) / knownSize); //TODO: Check for Manual Rows/Cols, if > Max
 
-            //Create Definitions
-            for (int i = 0; i <= maxAxis; i++)
-            {
-                if (Orientation == Orientation.Vertical)
-                {
-                    GridControl.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
-                }
-                else
-                {
-                    GridControl.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto});
-                }
-            }
-
+            
             int known = 0;
             int unknown = 0;
 
@@ -137,14 +125,17 @@ namespace myJIRA.UserControls
                     if (cs is int)
                         inc = (int) cs;
 
-                    if (Equals(i.GetValue(Grid.ColumnProperty), 0))
+                    var val = i.GetValue(Grid.ColumnProperty);
+                    if (Equals(val, 0))
                     {
                         i.SetValue(Grid.ColumnProperty, known);
                         known += inc;
                     }
+                    else
+                        known = Convert.ToInt32(val) + inc;
 
-                    if (Equals(i.GetValue(Grid.RowProperty), 0))
-                        i.SetValue(Grid.RowProperty, unknown);
+                    //if (Equals(i.GetValue(Grid.RowProperty), 0)) Not allowed
+                    i.SetValue(Grid.RowProperty, unknown);
                 }
                 else
                 {
@@ -152,14 +143,18 @@ namespace myJIRA.UserControls
                     if (rs is int)
                         inc = (int)rs;
 
-                    if (Equals(i.GetValue(Grid.RowProperty),0))
+                    var val = i.GetValue(Grid.RowProperty);
+                    if (Equals(val, 0))
                     {
                         i.SetValue(Grid.RowProperty, known);
                         known += inc;
                     }
+                    else
+                        known = Convert.ToInt32(val) + inc;
 
-                    if (Equals(i.GetValue(Grid.ColumnProperty),0))
-                        i.SetValue(Grid.ColumnProperty, unknown);
+
+                    //if (Equals(i.GetValue(Grid.ColumnProperty),0))
+                    i.SetValue(Grid.ColumnProperty, unknown);
                 }
 
                 GridControl.Children.Add(i);
@@ -170,6 +165,20 @@ namespace myJIRA.UserControls
                     unknown++;
                 }
             }
+
+            //Create Definitions
+            for (int i = 0; i <= unknown; i++)
+            {
+                if (Orientation == Orientation.Vertical)
+                {
+                    GridControl.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                }
+                else
+                {
+                    GridControl.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+                }
+            }
+
 
         }
 

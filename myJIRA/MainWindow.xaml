@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
-        Title="myJIRA" Height="600" Width="525" WindowStartupLocation="CenterScreen">
+        Title="myJIRA" Height="600" Width="525" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
