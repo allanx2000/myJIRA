@@ -104,6 +104,8 @@ namespace myJIRA.ViewModels
             }
         }
 
+        public ICommand CloseCommand { get => new CommandHelper(() => archiveViewerWindow.Close()); }
+
 
         public ICommand LoadCommand { get => new CommandHelper(LoadResults); }
 

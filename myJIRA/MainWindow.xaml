@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:myJIRA"
         mc:Ignorable="d"
         Title="myJIRA" Height="600" Width="525" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="N" Command="{Binding CreateJiraCommand}"/>
+    </Window.InputBindings>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
