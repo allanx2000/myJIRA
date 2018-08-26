@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="ListBoxItemTemplate">
-            <StackPanel Margin="0 0 0 10" Name="Container">
+            <StackPanel Margin="0 0 5 10" Name="Container">
                 <StackPanel.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Edit" Command="{Binding EditCommand}"/>
@@ -40,7 +40,7 @@
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto" MaxWidth="150"/>
+                            <ColumnDefinition Width="Auto" MaxWidth="200" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -75,9 +75,18 @@
                             </Label>
                         </StackPanel>
 
-                        <Label Grid.Column="1" Grid.Row="1" Background="LightPink"  MaxWidth="150" HorizontalAlignment="Left" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
-                            <TextBlock  Text="{Binding Status}" TextTrimming="CharacterEllipsis"/>
-                        </Label>
+                        <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Orientation="Horizontal">
+                            
+                            <Label  Background="LightPink"  MaxWidth="150" HorizontalAlignment="Left" Visibility="{Binding DataContext.StatusVisibility, ElementName=Container}">
+                                <TextBlock  Text="{Binding Status}" TextTrimming="CharacterEllipsis"/>
+                            </Label>
+
+                            <!--TODO: Replace with Icon-->
+                            <Label ToolTip="Has Notes" Background="FloralWhite" Visibility="{Binding DataContext.HasNotes, ElementName=Container}">
+                                <TextBlock  Text="🖺" FontWeight="Bold"/>
+                            </Label>
+
+                        </StackPanel>
                     </Grid>
                 </StackPanel>
 

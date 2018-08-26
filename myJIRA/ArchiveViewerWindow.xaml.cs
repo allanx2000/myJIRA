@@ -1,6 +1,7 @@
 ﻿using myJIRA.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,31 @@ namespace myJIRA
 
             this.vm = new ArchiveViewerWindowViewModel(this);
             DataContext = vm;
+        }
+
+        private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //TODO: Remove Dup
+            var lb = sender as ListBox;
+
+            if (lb != null && lb.SelectedItem != null)
+            {
+                var item = lb.SelectedItem as JIRAItemViewModel;
+
+                if (item != null)
+                {
+                    string url = AppStateManager.Settings.ServerUrl + item.Data.JiraKey;
+
+                    string cbp = AppStateManager.Settings.CustomBrowserPath;
+
+                    if (string.IsNullOrEmpty(cbp))
+                    {
+                        Process.Start(url);
+                    }
+                    else
+                        Process.Start(cbp, url);
+                }
+            }
         }
     }
 }

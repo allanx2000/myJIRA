@@ -360,7 +360,7 @@ namespace myJIRA.DAO
 
         public List<JIRAItem> LoadArchivedJIRAs(DateTime start, DateTime end)
         {
-            string sql = "select * from {0} where done_date <= '{1}' and archived_date >= '{2}'";
+            string sql = "select * from {0} where done_date <= '{1}' and done_date >= '{2}'";
 
             sql = string.Format(sql,
                 Jiras, 

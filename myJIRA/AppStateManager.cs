@@ -97,7 +97,7 @@ namespace myJIRA
             if (orientation == Orientation.Vertical)
                 bc.Height = 300;
             else
-                bc.Width = 400;
+                bc.Width = 450;
             //bc.SetBinding(BoardControl.WidthProperty, boardWidth);
         }
 

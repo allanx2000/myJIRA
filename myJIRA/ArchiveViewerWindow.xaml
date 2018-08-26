@@ -59,7 +59,7 @@
                 <Label DockPanel.Dock="Top" Content="{Binding ResultStatusText, FallbackValue=ResultStatusText}" Height="25"/>
                 <ListBox Margin="5" HorizontalContentAlignment="Stretch" 
                          ItemsSource="{Binding Items}" 
-                         SelectedItem="{Binding SelectedItem}">
+                         SelectedItem="{Binding SelectedItem}" MouseDoubleClick="ListBox_MouseDoubleClick">
 
                     <ListBox.ContextMenu>
                         <ContextMenu>

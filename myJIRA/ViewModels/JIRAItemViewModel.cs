@@ -15,6 +15,10 @@ namespace myJIRA.ViewModels
             this.item = item;
         }
 
+        public Visibility HasNotes { get {
+                return string.IsNullOrEmpty(item.Notes) ? Visibility.Collapsed : Visibility.Visible;
+            } }
+
         public void DataUpdated()
         {
             RaisePropertyChanged("Data");
