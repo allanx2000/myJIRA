@@ -119,6 +119,8 @@
     <Compile Include="EditBoardWindow.xaml.cs">
       <DependentUpon>EditBoardWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Exporters\IExporter.cs" />
+    <Compile Include="Exporters\TSVExporter.cs" />
     <Compile Include="ManageBoardsWindow.xaml.cs">
       <DependentUpon>ManageBoardsWindow.xaml</DependentUpon>
     </Compile>

@@ -150,6 +150,14 @@ namespace myJIRA
             }
         }
 
+        public static List<JIRAItem> OpenJIRAs
+        {
+            get
+            {
+                return (from j in openJiras select j.Data).ToList();
+            }
+        }
+
         public static void ReloadOpenJIRAs()
         {
             openJiras.Clear();

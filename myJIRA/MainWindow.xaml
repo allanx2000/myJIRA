@@ -29,9 +29,7 @@
             <Menu DockPanel.Dock="Left">
                 <MenuItem Header="File">
                     <MenuItem Header="Import JIRAs"/>
-                    <!--
-                    <MenuItem Header="Save"/>
-                    -->
+                    <MenuItem Header="Export JIRAs" Command="{Binding ExportCommand}"/>
                     <MenuItem Header="Manage Boards" Command="{Binding ManageBoardsCommand}"/>
                     <Separator/>
                     <MenuItem Header="App Settings" Command="{Binding OpenSettingsCommand}"/>

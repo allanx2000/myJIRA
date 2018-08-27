@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System;
 using Innouvous.Utils;
+using myJIRA.Exporters;
 
 namespace myJIRA.ViewModels
 {
@@ -106,6 +107,32 @@ namespace myJIRA.ViewModels
 
             AppStateManager.ReloadOpenJIRAs();
         }
-        
+
+        public ICommand ExportCommand
+        {
+            get => new CommandHelper(Export);
+        }
+
+        private void Export()
+        {
+            try
+            {
+                var dlg = DialogsUtility.CreateSaveFileDialog("Export JIRAs");
+                DialogsUtility.AddExtension(dlg, "TSV", "*.tsv");
+
+                dlg.ShowDialog();
+
+                if (!string.IsNullOrEmpty(dlg.FileName))
+                {
+                    TSVExporter.Instance.Export(AppStateManager.OpenJIRAs, dlg.FileName);
+
+                    MessageBoxFactory.ShowInfo("Done", "Exported Successfully");
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
+        }
     }
 }
