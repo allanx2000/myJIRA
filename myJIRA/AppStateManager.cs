@@ -95,9 +95,9 @@ namespace myJIRA
         private static void ConfigureBoardControl(MainWindow window, BoardControl bc, Orientation orientation)
         {
             if (orientation == Orientation.Vertical)
-                bc.Height = 300;
+                bc.Height = Settings.BoardHeight;
             else
-                bc.Width = 450;
+                bc.Width = Settings.BoardWidth;
             //bc.SetBinding(BoardControl.WidthProperty, boardWidth);
         }
 

@@ -33,10 +33,14 @@ namespace myJIRA.ViewModels
             ServerURL = settings.ServerUrl;
             CustomBrowserPath = settings.CustomBrowserPath;
             SaveWindowSize = settings.SaveWindowSize;
+
             BoardOrientation = AppStateManager.BoardOrientation.ToString();
+            BoardWidth = settings.BoardWidth;
+            BoardHeight = settings.BoardHeight;
+
         }
 
-        
+
         public bool Cancelled { get; private set; }
 
         public string DBPath
@@ -71,6 +75,26 @@ namespace myJIRA.ViewModels
             }
         }
 
+
+        public int BoardHeight
+        {
+            get { return Get<int>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
+
+        public int BoardWidth
+        {
+            get { return Get<int>(); }
+            set
+            {
+                Set(value);
+                RaisePropertyChanged();
+            }
+        }
 
 
         public ICommand SelectBrowserCommand
@@ -157,6 +181,8 @@ namespace myJIRA.ViewModels
                 settings.SaveWindowSize = SaveWindowSize;
                 
                 settings.BoardOrientation = (int)Enum.Parse(typeof(Orientation), BoardOrientation);
+                settings.BoardHeight = BoardHeight;
+                settings.BoardWidth = BoardWidth;
 
                 settings.Save();
 

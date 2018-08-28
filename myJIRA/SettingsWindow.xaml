@@ -38,6 +38,13 @@
             <Label Style="{StaticResource GridField}">Orientation:</Label>
             <ComboBox ItemsSource="{Binding BoardOrientations}" SelectedItem="{Binding BoardOrientation}"/>
 
+            <Label Style="{StaticResource GridField}">Board Height:</Label>
+            <TextBox Text="{Binding BoardHeight}"/>
+
+            <Label Style="{StaticResource GridField}">Board Width:</Label>
+            <TextBox Text="{Binding BoardWidth}"/>
+
+
             <CheckBox Grid.Column="1" IsChecked="{Binding SaveWindowSize}">Save Window Size</CheckBox>
 
             <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">

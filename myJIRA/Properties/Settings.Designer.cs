@@ -106,5 +106,29 @@ namespace myJIRA.Properties {
                 this["BoardOrientation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int BoardHeight {
+            get {
+                return ((int)(this["BoardHeight"]));
+            }
+            set {
+                this["BoardHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("450")]
+        public int BoardWidth {
+            get {
+                return ((int)(this["BoardWidth"]));
+            }
+            set {
+                this["BoardWidth"] = value;
+            }
+        }
     }
 }
