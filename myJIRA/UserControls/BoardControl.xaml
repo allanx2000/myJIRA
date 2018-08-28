@@ -9,6 +9,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
+
+        <BitmapImage x:Key="NotesIcon" UriSource="../note-24.png" />
+
+
         <DataTemplate x:Key="ListBoxItemTemplate">
             <StackPanel Margin="0 0 5 10" Name="Container">
                 <StackPanel.ContextMenu>
@@ -81,10 +85,8 @@
                                 <TextBlock  Text="{Binding Status}" TextTrimming="CharacterEllipsis"/>
                             </Label>
 
-                            <!--TODO: Replace with Icon-->
-                            <Label ToolTip="Has Notes" Background="FloralWhite" Visibility="{Binding DataContext.HasNotes, ElementName=Container}">
-                                <TextBlock  Text="🖺" FontWeight="Bold"/>
-                            </Label>
+                            <Image Source="{StaticResource NotesIcon}" Visibility="{Binding DataContext.HasNotes, ElementName=Container}">
+                            </Image>
 
                         </StackPanel>
                     </Grid>
