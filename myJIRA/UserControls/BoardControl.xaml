@@ -85,7 +85,7 @@
                                 <TextBlock  Text="{Binding Status}" TextTrimming="CharacterEllipsis"/>
                             </Label>
 
-                            <Image Source="{StaticResource NotesIcon}" Visibility="{Binding DataContext.HasNotes, ElementName=Container}">
+                            <Image ToolTip="{Binding Notes}" Source="{StaticResource NotesIcon}" Visibility="{Binding DataContext.HasNotes, ElementName=Container}">
                             </Image>
 
                         </StackPanel>
