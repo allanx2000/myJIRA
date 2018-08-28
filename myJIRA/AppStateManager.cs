@@ -13,6 +13,9 @@ namespace myJIRA
 {
     internal static class AppStateManager
     {
+        public const string NotStarted = "Not Started";
+        public const string ReadyForRelease = "Ready for Release";
+
         private static Properties.Settings settings = Properties.Settings.Default;
         public static Properties.Settings Settings { get => settings; }
 
@@ -36,9 +39,9 @@ namespace myJIRA
 
             ReloadOpenJIRAs();
             
-            var first = BoardControl.CreateFirstBoard("Not Started", openJiras);
+            var first = BoardControl.CreateFirstBoard(NotStarted, openJiras);
             ConfigureBoardControl(mainWindow, first, BoardOrientation);
-            var last = BoardControl.CreateLastBoard("Ready for Release", openJiras);
+            var last = BoardControl.CreateLastBoard(ReadyForRelease, openJiras);
             ConfigureBoardControl(mainWindow, last, BoardOrientation);
 
             boardControls = new List<BoardControl>();
