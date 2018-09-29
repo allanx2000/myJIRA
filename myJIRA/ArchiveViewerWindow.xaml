@@ -79,6 +79,8 @@
             </DockPanel>
         </GroupBox>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+            <Button Command="{Binding ExportCommand}">Export...</Button>
+        </StackPanel>
     </Grid>
 </Window>

@@ -120,6 +120,7 @@ namespace myJIRA.ViewModels
                 var dlg = DialogsUtility.CreateSaveFileDialog("Export JIRAs");
                 DialogsUtility.AddExtension(dlg, "TSV", "*.tsv");
 
+                dlg.FileName = "Open JIRAs (" + DateTime.Today.ToString("yyyyMMdd") + ")";
                 dlg.ShowDialog();
 
                 if (!string.IsNullOrEmpty(dlg.FileName))

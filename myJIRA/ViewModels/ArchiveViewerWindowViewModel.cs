@@ -1,7 +1,10 @@
-﻿using Innouvous.Utils.MVVM;
+﻿using Innouvous.Utils;
+using Innouvous.Utils.MVVM;
+using myJIRA.Exporters;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -131,6 +134,37 @@ namespace myJIRA.ViewModels
                 items.Count);
 
             Items.Refresh();
+        }
+
+        public ICommand ExportCommand { get => new CommandHelper(ExportJIRAs); }
+
+        private void ExportJIRAs()
+        {
+            try
+            {
+                if (items.Count == 0)
+                    return;
+
+                var dlg = DialogsUtility.CreateSaveFileDialog("Export JIRAs");
+                DialogsUtility.AddExtension(dlg, "TSV", "*.tsv");
+
+                dlg.FileName = string.Format("Archived ({0} - {1}).tsv", 
+                    FromDate.Value.ToString("yyyyMMdd"),
+                    ToDate.Value.ToString("yyyyMMdd"));
+                dlg.ShowDialog();
+
+                if (!string.IsNullOrEmpty(dlg.FileName))
+                {
+                    var list = (from i in items select i.Data).ToList();
+                    TSVExporter.Instance.Export(list, dlg.FileName);
+
+                    MessageBoxFactory.ShowInfo("Done", "Exported Successfully");
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e);
+            }
         }
     }
 }
