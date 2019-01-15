@@ -69,15 +69,15 @@ namespace myJIRA.Exporters
 
         private string GetBoard(JIRAItem j)
         {
-            if (j.BoardId == null)
-                return AppStateManager.NotStarted;
-            else if (j.DoneDate != null)
+            if (j.DoneDate != null)
             {
                 if (j.ArchivedDate != null)
                     return "Archived";
                 else
                     return AppStateManager.ReadyForRelease;
             }
+            else if (j.BoardId == null)
+                return AppStateManager.NotStarted;
             else return BoardMap[j.BoardId.Value];
         }
 

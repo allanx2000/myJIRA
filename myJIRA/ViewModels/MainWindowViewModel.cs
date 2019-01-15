@@ -3,6 +3,8 @@ using System.Windows.Input;
 using System;
 using Innouvous.Utils;
 using myJIRA.Exporters;
+using myJIRA.Models;
+using System.Collections.Generic;
 
 namespace myJIRA.ViewModels
 {
@@ -121,11 +123,12 @@ namespace myJIRA.ViewModels
                 DialogsUtility.AddExtension(dlg, "TSV", "*.tsv");
 
                 dlg.FileName = "Open JIRAs (" + DateTime.Today.ToString("yyyyMMdd") + ")";
-                dlg.ShowDialog();
+                var ok = dlg.ShowDialog();
 
-                if (!string.IsNullOrEmpty(dlg.FileName))
+                if (true == ok && !string.IsNullOrEmpty(dlg.FileName))
                 {
-                    TSVExporter.Instance.Export(AppStateManager.OpenJIRAs, dlg.FileName);
+                    var boardJiras = new List<JIRAItem>();
+                    TSVExporter.Instance.Export(AppStateManager.OpenJIRAs , dlg.FileName);
 
                     MessageBoxFactory.ShowInfo("Done", "Exported Successfully");
                 }

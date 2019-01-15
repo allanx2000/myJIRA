@@ -1,5 +1,1 @@
-﻿Set custom selected color
-
-Sprint and Status Value lookup
-
--Implement Archive/History Vuiew/Exorter
+﻿-Add PR Field and link button
