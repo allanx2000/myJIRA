@@ -85,6 +85,9 @@
                                 <TextBlock  Text="{Binding Status}" TextTrimming="CharacterEllipsis"/>
                             </Label>
 
+                            <Button Command="{Binding DataContext.OpenPullRequestCommand, ElementName=Container}" 
+                                    Visibility="{Binding DataContext.HasPullRequest, ElementName=Container}" 
+                                    ToolTip="{Binding DataContext.PullRequest, ElementName=Container}">PR</Button>
                             <Image ToolTip="{Binding Notes}" Source="{StaticResource NotesIcon}" Visibility="{Binding DataContext.HasNotes, ElementName=Container}">
                             </Image>
 

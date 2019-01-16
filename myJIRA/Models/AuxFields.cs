@@ -12,6 +12,7 @@ namespace myJIRA.Models
     public enum AuxFields
     {
         Epic = 1,
-        TimeEstimate
+        TimeEstimate,
+        PullRequest
     }
 }

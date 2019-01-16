@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System;
 using Innouvous.Utils;
 using System.Windows;
+using System.Diagnostics;
 
 namespace myJIRA.ViewModels
 {   public class JIRAItemViewModel : Innouvous.Utils.Merged45.MVVM45.ViewModel
@@ -15,9 +16,20 @@ namespace myJIRA.ViewModels
             this.item = item;
         }
 
-        public Visibility HasNotes { get {
+        
+        public Visibility HasNotes {
+            get {
                 return string.IsNullOrEmpty(item.Notes) ? Visibility.Collapsed : Visibility.Visible;
-            } }
+            }
+        }
+
+        public Visibility HasPullRequest
+        {
+            get
+            {
+                return string.IsNullOrEmpty(item.GetAuxField(AuxFields.PullRequest) as string) ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
 
         public void DataUpdated()
         {
@@ -25,6 +37,11 @@ namespace myJIRA.ViewModels
         }
 
         #region AuxFields Getters
+
+        public string PullRequest
+        {
+            get => Data.GetAuxField(AuxFields.PullRequest) as string;
+        }
 
         public string Epic
         {
@@ -61,6 +78,24 @@ namespace myJIRA.ViewModels
         public ICommand EditCommand
         {
             get => new CommandHelper(EditJira);
+        }
+
+        public ICommand OpenPullRequestCommand
+        {
+            get => new CommandHelper(OpenPullRequest);
+        }
+
+        private void OpenPullRequest()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(PullRequest))
+                    Process.Start(PullRequest);
+            }
+            catch (Exception e)
+            {
+                MessageBoxFactory.ShowError(e, title: "Link not Vaild");
+            }
         }
 
         public void EditJira()

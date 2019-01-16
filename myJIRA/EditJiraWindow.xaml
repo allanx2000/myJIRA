@@ -65,9 +65,13 @@
 
             <Label Grid.Row="2" Grid.Column="2" Style="{StaticResource GridField}">Status:</Label>
             <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Status}"/>
-
+            
             <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource GridField}" ToolTip="Estimated Time ">Est. Time: </Label>
             <TextBox Grid.Row="3" Grid.Column="1" Width="60" MaxLength="4" HorizontalAlignment="Left" Text="{Binding TimeEstimate}"/>
+
+            <Label Grid.Row="3" Grid.Column="2" Style="{StaticResource GridField}" ToolTip="Pull Request">PR:</Label>
+            <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding PullRequest}"/>
+
 
             <GroupBox Grid.Row="4" Grid.ColumnSpan="4" Header="Notes">
                 <TextBox Height="300" AcceptsReturn="True" AcceptsTab="True" 

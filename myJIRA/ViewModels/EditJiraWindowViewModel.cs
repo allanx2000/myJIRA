@@ -32,12 +32,13 @@ namespace myJIRA.ViewModels
                 SprintId = existing.SprintId;
                 Status = existing.Status;
                 JiraTitle = existing.Title;
-                
+
                 IsDone = existing.DoneDate != null;
                 IsArchived = existing.ArchivedDate != null;
 
                 Epic = existing.GetAuxField(AuxFields.Epic) as string;
                 TimeEstimate = existing.GetAuxField(AuxFields.TimeEstimate) as string;
+                PullRequest = existing.GetAuxField(AuxFields.PullRequest) as string;
             }
         }
         
@@ -54,6 +55,8 @@ namespace myJIRA.ViewModels
 
         public string Epic { get; set; }
         public string TimeEstimate { get; set; }
+
+        public string PullRequest { get; set; }
 
         public ICollection<string> Sprints { get => AppStateManager.Sprints; }
         public ICollection<string> Epics { get => AppStateManager.Epics; }
@@ -91,6 +94,7 @@ namespace myJIRA.ViewModels
                 item.Title = JiraTitle;
                 item.SetAuxField(AuxFields.Epic, Epic);
                 item.SetAuxField(AuxFields.TimeEstimate, TimeEstimate);
+                item.SetAuxField(AuxFields.PullRequest, PullRequest);
 
                 if (IsDone)
                 {
